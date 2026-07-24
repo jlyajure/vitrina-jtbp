@@ -139,6 +139,8 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 0 10px rgba(229, 169, 61, 0.6);
+            white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+            flex-shrink: 0; /* Evita que se deforme si hay poco espacio */
         }
 
         .pulse-dot {
@@ -500,29 +502,39 @@
         /* === RESPONSIVE DESIGN (ADAPTACIÓN MÓVIL OPTIMIZADA) === */
         @media (max-width: 768px) {
             .navbar {
-                padding: 15px 20px;
+                padding: 15px 10px; /* Reducimos el padding lateral */
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
-            .navbar .logo img { height: 75px; }
-            .navbar nav ul { gap: 12px; flex-wrap: wrap; justify-content: center; }
-            .navbar nav ul li a { font-size: 11px; }
+            .navbar .logo img { height: 75px; } 
+            
+            /* Separación cuadriculada inteligente para el menú */
+            .navbar nav ul { 
+                gap: 10px 15px; /* Espacio vertical y horizontal */
+                flex-wrap: wrap; 
+                justify-content: center; 
+            }
+            .navbar nav ul li a { font-size: 11px; padding: 5px 0;}
             
             #btn-compartir { padding: 4px 10px; font-size: 11px; }
 
+            /* El botón Ticker ya no choca con el texto */
             .live-ticker-bar {
                 top: 145px;
-                padding: 8px 10px;
+                padding: 10px;
             }
             .live-ticker-content {
+                flex-direction: column; /* Pasamos el texto abajo de la pastilla */
+                gap: 8px;
                 font-size: 0.75rem;
             }
 
-            .hero-contenido { margin-top: 150px; padding: 15px; }
+            .hero-contenido { margin-top: 170px; padding: 15px; } /* Bajamos el contenido central */
             .hero-contenido h1 { font-size: 2.2rem; }
             .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
             
+            /* Ajuste de botones en móvil */
             .hero-botones {
                 flex-direction: column;
                 gap: 15px;
@@ -537,6 +549,7 @@
             .section-title { font-size: 2.2rem; margin-bottom: 40px; }
             .seccion-oscura, .seccion-gris, .seccion-nosotros { padding: 40px 15px; }
 
+            /* Tarjetas de Programas a 2 columnas equilibradas */
             .grid-programas {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -565,6 +578,7 @@
                 width: 100%;
             }
 
+            /* Tarjetas de Leyendas a 2 columnas equilibradas */
             .grid-artistas {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -590,6 +604,7 @@
                 text-align: left;
             }
 
+            /* Ajustes de Nosotros en móvil */
             .contenido-nosotros {
                 padding: 25px 15px;
             }
@@ -598,6 +613,7 @@
                 text-align: left;
             }
 
+            /* Footer en móvil */
             .footer {
                 flex-direction: column;
                 text-align: center;
@@ -626,7 +642,6 @@
                 <li><a href="#artistas">Leyendas</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a class="trigger-qr">App</a></li>
-                <!-- NUEVO BOTÓN DE COMPARTIR -->
                 <li><a href="#" id="btn-compartir">Compartir <span>🔗</span></a></li>
             </ul>
         </nav>
@@ -869,7 +884,6 @@
                             console.log('Interacción de compartir cancelada o fallida.');
                         }
                     } else {
-                        // Fallback para PC o navegadores antiguos: Copia al portapapeles
                         try {
                             await navigator.clipboard.writeText(urlACompartir);
                             toastCompartir.classList.add('mostrar');
