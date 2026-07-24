@@ -6,13 +6,13 @@
     <title>JazzTaBueno Productions | Premium</title>
     
     <!-- === LOGO EN LA PESTAÑA DEL NAVEGADOR (FAVICON) === -->
-    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="icon" type="image/png" href="logo.png">
     
     <!-- === TARJETA DE PRESENTACIÓN PARA WHATSAPP Y REDES (OPEN GRAPH) === -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="JazzTaBueno Productions | Premium">
     <meta property="og:description" content="El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock. Escucha nuestros programas exclusivos.">
-    <meta property="og:image" itemprop="image" content="logo.jpg">
+    <meta property="og:image" itemprop="image" content="logo.png">
     <meta property="og:url" content="https://vitrina-jtbp.vercel.app/">
     <meta property="og:site_name" content="JazzTaBueno Productions">
     
@@ -54,19 +54,18 @@
             align-items: center;
         }
 
-        /* EFECTO NEÓN Y EXPANSIÓN PARA EL LOGO PRINCIPAL */
+        /* EFECTO NEÓN Y EXPANSIÓN PARA EL LOGO PRINCIPAL PNG */
         .navbar .logo img {
             height: 110px; 
-            mix-blend-mode: screen;
             animation: latido-neon 2.5s infinite ease-in-out;
             cursor: pointer;
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
         .navbar .logo img:hover {
-            animation: none; /* Detiene el latido para hacer un zoom fijo */
+            animation: none; 
             transform: scale(1.1);
-            filter: brightness(1.4); /* Ilumina el neón al máximo */
+            filter: brightness(1.4); 
         }
 
         @keyframes latido-neon {
@@ -464,7 +463,6 @@
 
         .footer-logo img {
             height: 60px;
-            mix-blend-mode: screen;
             filter: grayscale(100%);
             transition: all 0.4s ease;
             cursor: pointer;
@@ -672,7 +670,7 @@
 
     <header class="navbar" id="navbar">
         <div class="logo">
-            <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
+            <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
         </div>
         <nav>
             <ul>
@@ -774,7 +772,7 @@
     <!-- === PIE DE PÁGINA (FOOTER) === -->
     <footer class="footer">
         <div class="footer-logo">
-            <img src="logo.jpg" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=\'color:#e5a93d; font-size:1.2rem;\'>JAZZTABUENO</h3>'">
+            <img src="logo.png" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=\'color:#e5a93d; font-size:1.2rem;\'>JAZZTABUENO</h3>'">
         </div>
         <div class="footer-copy">
             &copy; 2026 JazzTaBueno Productions. Todos los derechos reservados.
