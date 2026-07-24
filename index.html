@@ -361,6 +361,41 @@
         .info-artista p::-webkit-scrollbar-thumb { background: #aa8c2c; border-radius: 10px; }
         .mensaje-servidor { grid-column: 1 / -1; text-align: center; color: #e5a93d; font-size: 1.2rem; padding: 40px; }
 
+        /* === SECCIÓN ¿QUIÉNES SOMOS? === */
+        .seccion-nosotros {
+            padding: 100px 50px;
+            background-color: #0a0a0a;
+            text-align: center;
+        }
+
+        .contenido-nosotros {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #000;
+            padding: 50px;
+            border-radius: 15px;
+            border: 1px solid #222;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .contenido-nosotros p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+            text-align: justify;
+            font-weight: 300;
+        }
+
+        .contenido-nosotros .firma {
+            color: #e5a93d;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         /* === PIE DE PÁGINA (FOOTER) === */
         .footer {
             background-color: #050505;
@@ -432,7 +467,6 @@
             .navbar nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
             .navbar nav ul li a { font-size: 12px; }
             
-            /* Ajuste del Ticker en móvil */
             .live-ticker-bar {
                 top: 115px;
                 padding: 8px 10px;
@@ -445,7 +479,6 @@
             .hero-contenido h1 { font-size: 2.2rem; }
             .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
             
-            /* Ajuste de botones en móvil */
             .hero-botones {
                 flex-direction: column;
                 gap: 15px;
@@ -458,9 +491,8 @@
             }
             
             .section-title { font-size: 2.2rem; margin-bottom: 40px; }
-            .seccion-oscura, .seccion-gris { padding: 40px 15px; }
+            .seccion-oscura, .seccion-gris, .seccion-nosotros { padding: 40px 15px; }
 
-            /* Tarjetas de Programas a 2 columnas equilibradas */
             .grid-programas {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -489,7 +521,6 @@
                 width: 100%;
             }
 
-            /* Tarjetas de Leyendas a 2 columnas equilibradas */
             .grid-artistas {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -515,7 +546,15 @@
                 text-align: left;
             }
 
-            /* Footer en móvil */
+            /* Ajustes de Nosotros en móvil */
+            .contenido-nosotros {
+                padding: 25px 15px;
+            }
+            .contenido-nosotros p {
+                font-size: 0.95rem;
+                text-align: left;
+            }
+
             .footer {
                 flex-direction: column;
                 text-align: center;
@@ -542,6 +581,7 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#programas">Música</a></li>
                 <li><a href="#artistas">Leyendas</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
                 <li><a class="trigger-qr">Ir a la App</a></li>
             </ul>
         </nav>
@@ -619,6 +659,16 @@
         <h2 class="section-title">Leyendas de la <span>Música</span></h2>
         <div class="grid-artistas" id="contenedor-leyendas">
             <!-- Firebase inyecta la rotación aquí -->
+        </div>
+    </section>
+
+    <!-- === SECCIÓN ¿QUIÉNES SOMOS? === -->
+    <section id="nosotros" class="seccion-nosotros">
+        <h2 class="section-title">Nuestra <span>Esencia</span></h2>
+        <div class="contenido-nosotros">
+            <p>Somos un equipo de apasionados por el buen sonido. En JazzTaBueno Productions no creemos en la música desechable; creemos en el arte que trasciende el tiempo, en los acordes que erizan la piel y en las voces que marcaron a generaciones enteras.</p>
+            <p>Nuestra misión es rescatar la época dorada de las leyendas musicales y llevarla directamente a tus oídos, curando meticulosamente cada programa para que disfrutes de la verdadera esencia del Jazz Clásico, la fiebre de Studio 79, el sabor indiscutible de la Salsa Brava y la rebeldía del Old School Rock.</p>
+            <div class="firma">El Equipo de JTBP</div>
         </div>
     </section>
 
