@@ -139,8 +139,8 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 0 10px rgba(229, 169, 61, 0.6);
-            white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
-            flex-shrink: 0; /* Evita que se deforme si hay poco espacio */
+            white-space: nowrap; 
+            flex-shrink: 0; 
         }
 
         .pulse-dot {
@@ -363,15 +363,30 @@
         .info-artista { padding: 25px; }
         .info-artista h4 { color: #e5a93d; font-size: 1.5rem; margin-bottom: 10px; font-weight: 700;}
 
+        /* FIX: Colores del nombre del programa (Género) para que resalten más */
         .info-artista .genero { 
-            display: inline-block; font-size: 0.75rem; text-transform: uppercase; 
-            letter-spacing: 1px; background-color: #222; padding: 5px 10px; 
-            border-radius: 5px; margin-bottom: 15px; color: #ccc; font-weight: 500;
+            display: inline-block; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            background-color: #e5a93d; /* Fondo dorado */
+            padding: 5px 10px; 
+            border-radius: 5px; 
+            margin-bottom: 15px; 
+            color: #000; /* Letras negras */
+            font-weight: 700;
         }
 
+        /* FIX: Alineación de texto siempre a la izquierda para evitar espacios gigantes */
         .info-artista p {
-            font-size: 0.95rem; color: #bbb; line-height: 1.6; text-align: justify;
-            max-height: 110px; overflow-y: auto; padding-right: 8px; font-weight: 300;
+            font-size: 0.95rem; 
+            color: #bbb; 
+            line-height: 1.6; 
+            text-align: left; 
+            max-height: 110px; 
+            overflow-y: auto; 
+            padding-right: 8px; 
+            font-weight: 300;
         }
 
         .info-artista p::-webkit-scrollbar { width: 4px; }
@@ -401,7 +416,7 @@
             line-height: 1.8;
             color: #ccc;
             margin-bottom: 20px;
-            text-align: justify;
+            text-align: left; /* Eliminamos justify que causa huecos feos */
             font-weight: 300;
         }
 
@@ -502,16 +517,15 @@
         /* === RESPONSIVE DESIGN (ADAPTACIÓN MÓVIL OPTIMIZADA) === */
         @media (max-width: 768px) {
             .navbar {
-                padding: 15px 10px; /* Reducimos el padding lateral */
+                padding: 15px 10px; 
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
             .navbar .logo img { height: 75px; } 
             
-            /* Separación cuadriculada inteligente para el menú */
             .navbar nav ul { 
-                gap: 10px 15px; /* Espacio vertical y horizontal */
+                gap: 10px 15px; 
                 flex-wrap: wrap; 
                 justify-content: center; 
             }
@@ -519,22 +533,22 @@
             
             #btn-compartir { padding: 4px 10px; font-size: 11px; }
 
-            /* El botón Ticker ya no choca con el texto */
+            /* FIX: Bajamos drásticamente el Ticker para que no choque con el menú que creció */
             .live-ticker-bar {
-                top: 145px;
+                top: 210px;
                 padding: 10px;
             }
             .live-ticker-content {
-                flex-direction: column; /* Pasamos el texto abajo de la pastilla */
+                flex-direction: column;
                 gap: 8px;
                 font-size: 0.75rem;
             }
 
-            .hero-contenido { margin-top: 170px; padding: 15px; } /* Bajamos el contenido central */
+            /* FIX: Bajamos el contenido del Hero para darle espacio al Ticker */
+            .hero-contenido { margin-top: 250px; padding: 15px; } 
             .hero-contenido h1 { font-size: 2.2rem; }
             .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
             
-            /* Ajuste de botones en móvil */
             .hero-botones {
                 flex-direction: column;
                 gap: 15px;
@@ -549,7 +563,6 @@
             .section-title { font-size: 2.2rem; margin-bottom: 40px; }
             .seccion-oscura, .seccion-gris, .seccion-nosotros { padding: 40px 15px; }
 
-            /* Tarjetas de Programas a 2 columnas equilibradas */
             .grid-programas {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -578,7 +591,6 @@
                 width: 100%;
             }
 
-            /* Tarjetas de Leyendas a 2 columnas equilibradas */
             .grid-artistas {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -593,6 +605,8 @@
                 font-size: 1.1rem;
                 margin-bottom: 5px;
             }
+            
+            /* En móvil los géneros se mantienen consistentes con el diseño de PC */
             .info-artista .genero {
                 font-size: 0.65rem;
                 padding: 4px 8px;
@@ -601,10 +615,9 @@
             .info-artista p {
                 font-size: 0.8rem;
                 max-height: 80px;
-                text-align: left;
+                text-align: left; /* Prevención definitiva contra espacios feos en móvil */
             }
 
-            /* Ajustes de Nosotros en móvil */
             .contenido-nosotros {
                 padding: 25px 15px;
             }
@@ -613,7 +626,6 @@
                 text-align: left;
             }
 
-            /* Footer en móvil */
             .footer {
                 flex-direction: column;
                 text-align: center;
@@ -735,7 +747,7 @@
     <!-- === PIE DE PÁGINA (FOOTER) === -->
     <footer class="footer">
         <div class="footer-logo">
-            <img src="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=\'color:#e5a93d; font-size:1.2rem;\'>JAZZTABUENO</h3>'">
+            <img src="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style='color:#e5a93d; font-size:1.2rem;'>JAZZTABUENO</h3>'">
         </div>
         <div class="footer-copy">
             &copy; 2026 JazzTaBueno Productions. Todos los derechos reservados.
