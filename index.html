@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JazzTaBueno Productions | Premium</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === RESETEO BÁSICO Y FUENTE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* === BARRA DE NAVEGACIÓN === */
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            color: white;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            height: 110px; 
+            mix-blend-mode: screen;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .navbar nav ul li a:hover {
+            color: #e5a93d; 
+        }
+
+        /* === SECCIÓN PRINCIPAL (HERO) === */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); 
+            z-index: 0;
+        }
+
+        .hero-contenido {
+            color: white;
+            z-index: 1;
+            max-width: 900px;
+            padding: 20px;
+            margin-top: 50px; 
+        }
+
+        .hero-contenido h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .hero-contenido .resaltado {
+            color: #e5a93d; 
+        }
+
+        .hero-contenido p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 50px;
+            color: #cccccc;
+        }
+
+        .btn-latido {
+            background: linear-gradient(45deg, #d4af37, #aa8c2c);
+            color: #000;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            animation: pulse-gold 2s infinite;
+        }
+
+        .btn-latido:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(45deg, #f7bb50, #d4af37);
+        }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        /* === SECCIÓN DE PROGRAMAS === */
+        .seccion-oscura { padding: 100px 50px; background-color: #0a0a0a; text-align: center; }
+        .seccion-gris { padding: 100px 50px; background-color: #111; text-align: center; }
+
+        .section-title { font-size: 3rem; margin-bottom: 60px; font-weight: 700; }
+        .section-title span { color: #e5a93d; }
+
+        .grid-programas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tarjeta {
+            background-color: #000000;
+            border: 1px solid #222;
+            padding: 30px 20px;
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .tarjeta:hover { transform: translateY(-10px); border-color: #e5a93d; box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
+        .tarjeta img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 20px; transition: transform 0.3s ease; }
+        .tarjeta:hover img { transform: scale(1.05); }
+        .tarjeta p { font-size: 0.9rem; color: #888; line-height: 1.6; margin-bottom: 15px;}
+        
+        .tarjeta-btn { color: #e5a93d; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
+
+        /* === SECCIÓN ARTISTAS FIRESTORE === */
+        .grid-artistas {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
+            max-width: 1350px; 
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tarjeta-artista {
+            background-color: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: left;
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+            animation: fadeIn 0.8s ease-in-out;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto; 
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tarjeta-artista:hover { transform: translateY(-5px); border-color: #e5a93d; }
+        .tarjeta-artista img { width: 100%; height: 300px; object-fit: cover; object-position: top; background-color: #111; }
+        .info-artista { padding: 25px; }
+        .info-artista h4 { color: #e5a93d; font-size: 1.5rem; margin-bottom: 10px; font-weight: 700;}
+
+        .info-artista .genero { 
+            display: inline-block; font-size: 0.75rem; text-transform: uppercase; 
+            letter-spacing: 1px; background-color: #222; padding: 5px 10px; 
+            border-radius: 5px; margin-bottom: 15px; color: #ccc; font-weight: 500;
+        }
+
+        .info-artista p {
+            font-size: 0.95rem; color: #bbb; line-height: 1.6; text-align: justify;
+            max-height: 110px; overflow-y: auto; padding-right: 8px; font-weight: 300;
+        }
+
+        .info-artista p::-webkit-scrollbar { width: 4px; }
+        .info-artista p::-webkit-scrollbar-track { background: #111; }
+        .info-artista p::-webkit-scrollbar-thumb { background: #aa8c2c; border-radius: 10px; }
+        .mensaje-servidor { grid-column: 1 / -1; text-align: center; color: #e5a93d; font-size: 1.2rem; padding: 40px; }
+
+        /* === MODAL DEL CÓDIGO QR === */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.92); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .modal.mostrar { display: flex; opacity: 1; }
+        .modal-content { background-color: #0a0a0a; padding: 40px; border: 1px solid #aa8c2c; border-radius: 15px; width: 90%; max-width: 500px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9); text-align: center; }
+        .close-qr-btn { color: #e5a93d; position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; transition: color 0.3s ease; }
+        .close-qr-btn:hover { color: #fff; }
+        .modal-content h3 { color: #e5a93d; margin-bottom: 15px; font-size: 2rem; font-weight: 700; letter-spacing: 1px;}
+        .modal-content p { color: #ccc; font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
+        
+        .qr-box { background-color: white; padding: 15px; border-radius: 10px; display: inline-block; margin-bottom: 25px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .qr-box img { width: 150px; height: 150px; display: block; }
+        
+        .btn-modal { background-color: transparent; border: 2px solid #e5a93d; color: #e5a93d; padding: 12px 30px; border-radius: 30px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
+        .btn-modal:hover { background-color: #e5a93d; color: #000; }
+
+        /* === MINI-APP FLOTANTE PARA ESCUCHAR (Picture-in-Picture) === */
+        #mini-app-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 360px;
+            height: 600px; 
+            background-color: #000;
+            border: 2px solid #e5a93d;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        #mini-app-container.mostrar {
+            transform: translateY(0);
+        }
+        
+        .mini-app-header {
+            background-color: #111;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .mini-app-header span.titulo {
+            color: #e5a93d;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cerrar-mini-app {
+            color: #fff;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .cerrar-mini-app:hover { color: #ff3333; }
+        
+        #mini-app-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #0a0a0a;
+        }
+
+        @media (max-width: 768px) {
+            #mini-app-container {
+                width: 90%;
+                height: 80%;
+                bottom: 5%;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#programas">Música</a></li>
+                <li><a href="#artistas">Leyendas</a></li>
+                <li><a class="trigger-qr">Ir a la App</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="overlay"></div>
+        <div class="hero-contenido">
+            <h1>JAZZTABUENO <span class="resaltado">PRODUCTIONS</span></h1>
+            <p>El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock.</p>
+            <a class="btn-latido trigger-mini-app" data-programa="inicio">🎧 Escuchar en la App</a>
+        </div>
+    </section>
+
+    <section id="programas" class="seccion-oscura">
+        <h2 class="section-title">El <span>Sonido</span></h2>
+        <div class="grid-programas">
+            <div class="tarjeta trigger-mini-app" data-programa="jazz">
+                <img src="jazz.jpg" alt="Jazztabueno">
+                <p>Una fina selección de trompetas, saxofones y el mejor ambiente del Jazz clásico para tus oídos.</p>
+                <div class="tarjeta-btn">Escuchar Ahora ➔</div>
+            </div>
+            <div class="tarjeta trigger-mini-app" data-programa="studio79">
+                <img src="studio.jpg" alt="Studio 79">
+                <p>Enciende la bola de espejos y disfruta de los grandes hits de los 70s y 80s sin interrupciones.</p>
+                <div class="tarjeta-btn">Escuchar Ahora ➔</div>
+            </div>
+            <div class="tarjeta trigger-mini-app" data-programa="salsa">
+                <img src="salsa.jpg" alt="Salsa Brava">
+                <p>El verdadero sabor de la clave y las leyendas de la percusión caribeña, directo a tu teléfono.</p>
+                <div class="tarjeta-btn">Escuchar Ahora ➔</div>
+            </div>
+            <div class="tarjeta trigger-mini-app" data-programa="rock">
+                <img src="rock.jpg" alt="Old School Rock">
+                <p>Sube el volumen y disfruta de los himnos distorsionados que marcaron historia.</p>
+                <div class="tarjeta-btn">Escuchar Ahora ➔</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="artistas" class="seccion-gris">
+        <h2 class="section-title">Leyendas de la <span>Música</span></h2>
+        <div class="grid-artistas" id="contenedor-leyendas">
+            <!-- Firebase inyecta la rotación aquí -->
+        </div>
+    </section>
+
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-qr-btn">&times;</span>
+            <h3>Lleva la Radio Contigo</h3>
+            <p>Para disfrutar de nuestra programación en máxima calidad y explorar la <strong>Bóveda del Legado</strong>, descarga nuestra App Oficial.</p>
+            <div class="qr-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/" alt="Escanea para descargar">
+            </div>
+            <br>
+            <p style="font-size: 0.85rem; color: #888;">Escanea el código con tu móvil o presiona el botón abajo</p>
+            <a href="https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/" target="_blank" class="btn-modal">Abrir JTBP App</a>
+        </div>
+    </div>
+
+    <div id="mini-app-container">
+        <div class="mini-app-header">
+            <span class="titulo">📻 Reproductor JTBP</span>
+            <span class="cerrar-mini-app">&times;</span>
+        </div>
+        <iframe id="mini-app-frame" src="" allow="autoplay; encrypted-media"></iframe>
+    </div>
+
+    <!-- SCRIPT LOGICO -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyARTTMkyEvB-NXe3tMmX5bkSzTBHtOfzOQ",
+            authDomain: "web-jazztabueno.firebaseapp.com",
+            projectId: "web-jazztabueno",
+            storageBucket: "web-jazztabueno.firebasestorage.app",
+            messagingSenderId: "295302576843",
+            appId: "1:295302576843:web:9f4d77a2f6e19aa462794e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            
+            // 1. CARGA DE FIRESTORE (LEYENDAS)
+            const contenedorLeyendas = document.getElementById('contenedor-leyendas');
+            contenedorLeyendas.innerHTML = '<div class="mensaje-servidor">Calculando rotación semanal y conectando al servidor...</div>';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "leyendas_activas"));
+                let todosLosArtistas = [];
+                querySnapshot.forEach((doc) => { todosLosArtistas.push(doc.data()); });
+
+                if (todosLosArtistas.length === 0) {
+                    contenedorLeyendas.innerHTML = '<div class="mensaje-servidor" style="color: #bbb;">Aún no hay leyendas cargadas en el servidor.</div>';
+                } else {
+                    const jazz = todosLosArtistas.filter(a => a.genero.toLowerCase().includes('jazz'));
+                    const studio = todosLosArtistas.filter(a => a.genero.toLowerCase().includes('studio'));
+                    const salsa = todosLosArtistas.filter(a => a.genero.toLowerCase().includes('salsa'));
+                    const rock = todosLosArtistas.filter(a => a.genero.toLowerCase().includes('rock'));
+
+                    const fecha = new Date();
+                    const inicioAño = new Date(fecha.getFullYear(), 0, 1);
+                    const dias = Math.floor((fecha - inicioAño) / (24 * 60 * 60 * 1000));
+                    const semanaActual = Math.ceil((dias + inicioAño.getDay() + 1) / 7);
+
+                    let carteleraSemanal = [];
+                    if(jazz.length > 0) carteleraSemanal.push(jazz[semanaActual % jazz.length]);
+                    if(studio.length > 0) carteleraSemanal.push(studio[semanaActual % studio.length]);
+                    if(salsa.length > 0) carteleraSemanal.push(salsa[semanaActual % salsa.length]);
+                    if(rock.length > 0) carteleraSemanal.push(rock[semanaActual % rock.length]);
+
+                    contenedorLeyendas.innerHTML = ''; 
+                    carteleraSemanal.forEach((artista) => {
+                        const tarjetaHTML = `
+                            <div class="tarjeta-artista">
+                                <img src="${artista.img}" alt="${artista.nombre}" onerror="this.onerror=null; this.src='logo.png'">
+                                <div class="info-artista">
+                                    <span class="genero">${artista.genero}</span>
+                                    <h4>${artista.nombre}</h4>
+                                    <p>${artista.desc}</p>
+                                </div>
+                            </div>
+                        `;
+                        contenedorLeyendas.innerHTML += tarjetaHTML;
+                    });
+                }
+            } catch (error) {
+                console.error("Error: ", error);
+                contenedorLeyendas.innerHTML = '<div class="mensaje-servidor" style="color: red;">Error de conexión con Firebase.</div>';
+            }
+
+            // 2. LÓGICA DEL MODAL QR
+            const modalQR = document.getElementById('qr-modal');
+            const closeQRBtn = document.querySelector('.close-qr-btn');
+            const triggersQR = document.querySelectorAll('.trigger-qr');
+
+            triggersQR.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modalQR.classList.add('mostrar');
+                });
+            });
+
+            closeQRBtn.addEventListener('click', () => { modalQR.classList.remove('mostrar'); });
+            window.addEventListener('click', (e) => { if (e.target === modalQR) { modalQR.classList.remove('mostrar'); }});
+
+            // 3. LÓGICA DE LA MINI-APP CON LLAVE MAESTRA (PARÁMETROS)
+            const miniAppContainer = document.getElementById('mini-app-container');
+            const iframeMiniApp = document.getElementById('mini-app-frame');
+            const triggersMiniApp = document.querySelectorAll('.trigger-mini-app');
+            const cerrarMiniApp = document.querySelector('.cerrar-mini-app');
+
+            triggersMiniApp.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Extraemos la llave maestra (ej: "jazz", "salsa")
+                    const señal = trigger.getAttribute('data-programa');
+                    
+                    // Obligamos a la ventana a cargar con la señal exacta apuntando a PRODUCCIÓN
+                    iframeMiniApp.src = `https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/?programa=${señal}`;
+                    
+                    miniAppContainer.classList.add('mostrar');
+                });
+            });
+
+            cerrarMiniApp.addEventListener('click', () => {
+                miniAppContainer.classList.remove('mostrar');
+                // Opcional: Detenemos la app cuando el usuario cierra la ventana
+                iframeMiniApp.src = "";
+            });
+        });
+    </script>
+</body>
+</html>
