@@ -319,6 +319,7 @@
             .info-artista p {
                 font-size: 0.8rem;
                 max-height: 80px;
+                text-align: left; /* CORRECCIÓN: Alineado a la izquierda para evitar espacios gigantes */
             }
 
             .modal-content { padding: 30px 20px; }
@@ -481,18 +482,16 @@
             closeQRBtn.addEventListener('click', () => { modalQR.classList.remove('mostrar'); });
             window.addEventListener('click', (e) => { if (e.target === modalQR) { modalQR.classList.remove('mostrar'); }});
 
-            // 3. LÓGICA DEL NUEVO POP-UP (PLAN B - ANTI-BLOQUEOS)
+            // 3. LÓGICA DEL REPRODUCTOR (ABRE EN PESTAÑA LIMPIA)
             const triggersPopup = document.querySelectorAll('.trigger-popup');
 
             triggersPopup.forEach(trigger => {
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
                     const señal = trigger.getAttribute('data-programa');
-                    
-                    // IMPORTANTE: Usamos el dominio limpio principal de producción de la App de JTBP
                     const appUrl = `https://jazztabueno-productions.vercel.app/?programa=${señal}`;
                     
-                    window.open(appUrl, "ReproductorJTBP", "width=420,height=650,menubar=no,toolbar=no,location=no,status=no");
+                    window.open(appUrl, '_blank');
                 });
             });
         });
