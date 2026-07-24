@@ -190,22 +190,30 @@
         .hero-contenido p {
             font-size: 1.2rem;
             font-weight: 300;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             color: #cccccc;
+        }
+
+        /* === BOTONES DEL HERO === */
+        .hero-botones {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
 
         .btn-latido {
             background: linear-gradient(45deg, #d4af37, #aa8c2c);
             color: #000;
             border: none;
-            padding: 18px 50px;
-            font-size: 1.2rem;
+            padding: 18px 40px;
+            font-size: 1.1rem;
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-decoration: none;
             display: inline-block;
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
@@ -215,6 +223,28 @@
         .btn-latido:hover {
             transform: translateY(-5px) scale(1.05);
             background: linear-gradient(45deg, #f7bb50, #d4af37);
+        }
+
+        .btn-secundario {
+            background: transparent;
+            color: #e5a93d;
+            border: 2px solid #e5a93d;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secundario:hover {
+            background: #e5a93d;
+            color: #000;
+            transform: translateY(-5px);
         }
 
         @keyframes pulse-gold {
@@ -243,18 +273,47 @@
             border: 1px solid #222;
             padding: 30px 20px;
             transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
             border-radius: 10px;
+            display: flex;
+            flex-direction: column;
         }
 
         .tarjeta:hover { transform: translateY(-10px); border-color: #e5a93d; box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
         .tarjeta img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 20px; transition: transform 0.3s ease; }
         .tarjeta:hover img { transform: scale(1.05); }
-        .tarjeta p { font-size: 0.9rem; color: #888; line-height: 1.6; margin-bottom: 15px;}
+        .tarjeta p { font-size: 0.9rem; color: #888; line-height: 1.6; margin-bottom: 20px; flex-grow: 1;}
         
-        .tarjeta-btn { color: #e5a93d; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
+        /* BOTONES DENTRO DE LAS TARJETAS */
+        .botones-tarjeta {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tarjeta-btn, .tarjeta-btn-mixcloud {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .tarjeta-btn { background-color: #e5a93d; color: #000; border: 1px solid #e5a93d;}
+        .tarjeta-btn:hover { background-color: #f7bb50; border-color: #f7bb50;}
+
+        .tarjeta-btn-mixcloud { background-color: transparent; color: #ccc; border: 1px solid #444; }
+        .tarjeta-btn-mixcloud:hover { border-color: #e5a93d; color: #fff; }
 
         /* === SECCIÓN ARTISTAS FIRESTORE === */
         .grid-artistas {
@@ -341,7 +400,18 @@
             .hero-contenido { margin-top: 120px; padding: 15px; }
             .hero-contenido h1 { font-size: 2.2rem; }
             .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
-            .btn-latido { padding: 15px 30px; font-size: 1rem; }
+            
+            /* Ajuste de botones en móvil para que queden uno sobre otro o centrados */
+            .hero-botones {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .btn-latido, .btn-secundario {
+                padding: 15px 30px; 
+                font-size: 1rem;
+                width: 100%;
+                max-width: 280px;
+            }
             
             .section-title { font-size: 2.2rem; margin-bottom: 40px; }
             .seccion-oscura, .seccion-gris { padding: 40px 15px; }
@@ -363,7 +433,17 @@
                 margin-bottom: 10px;
                 line-height: 1.4;
             }
-            .tarjeta-btn { font-size: 0.7rem; }
+            
+            .botones-tarjeta {
+                padding-top: 12px;
+                flex-direction: column; /* Apila los botones en celulares muy estrechos */
+                gap: 8px;
+            }
+            .tarjeta-btn, .tarjeta-btn-mixcloud { 
+                font-size: 0.65rem; 
+                padding: 8px 5px; 
+                width: 100%;
+            }
 
             /* Tarjetas de Leyendas a 2 columnas equilibradas */
             .grid-artistas {
@@ -429,32 +509,55 @@
         <div class="hero-contenido">
             <h1>JAZZTABUENO <span class="resaltado">PRODUCTIONS</span></h1>
             <p>El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock.</p>
-            <a class="btn-latido trigger-popup" data-programa="inicio">🎧 Escuchar en la App</a>
+            
+            <!-- NUEVA BOTONERA DOBLE DEL HERO -->
+            <div class="hero-botones">
+                <a class="btn-latido trigger-popup" data-programa="inicio">📱 App Oficial</a>
+                <!-- Enlace principal de la productora matriz -->
+                <a href="https://www.mixcloud.com/JazzTaBueno/" target="_blank" class="btn-secundario">☁️ Mixcloud</a>
+            </div>
+
         </div>
     </section>
 
     <section id="programas" class="seccion-oscura">
         <h2 class="section-title">El <span>Sonido</span></h2>
         <div class="grid-programas">
-            <div class="tarjeta trigger-popup" data-programa="jazz">
+            <!-- TARJETA JAZZ -->
+            <div class="tarjeta">
                 <img src="jazz.jpg" alt="Jazztabueno" onerror="this.src='https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=600&auto=format&fit=crop'">
                 <p>Una fina selección de trompetas, saxofones y el mejor ambiente del Jazz clásico para tus oídos.</p>
-                <div class="tarjeta-btn">Escuchar Ahora ➔</div>
+                <div class="botones-tarjeta">
+                    <a class="tarjeta-btn trigger-popup" data-programa="jazz">🎧 App</a>
+                    <a href="https://www.mixcloud.com/JazzTaBueno/" target="_blank" class="tarjeta-btn-mixcloud">☁️ Mixcloud</a>
+                </div>
             </div>
-            <div class="tarjeta trigger-popup" data-programa="studio79">
+            <!-- TARJETA STUDIO 79 -->
+            <div class="tarjeta">
                 <img src="studio.jpg" alt="Studio 79">
                 <p>Enciende la bola de espejos y disfruta de los grandes hits de los 70s y 80s sin interrupciones.</p>
-                <div class="tarjeta-btn">Escuchar Ahora ➔</div>
+                <div class="botones-tarjeta">
+                    <a class="tarjeta-btn trigger-popup" data-programa="studio79">🎧 App</a>
+                    <a href="https://www.mixcloud.com/Studio79/" target="_blank" class="tarjeta-btn-mixcloud">☁️ Mixcloud</a>
+                </div>
             </div>
-            <div class="tarjeta trigger-popup" data-programa="salsa">
+            <!-- TARJETA SALSA -->
+            <div class="tarjeta">
                 <img src="salsa.jpg" alt="Salsa Brava">
                 <p>El verdadero sabor de la clave y las leyendas de la percusión caribeña, directo a tu teléfono.</p>
-                <div class="tarjeta-btn">Escuchar Ahora ➔</div>
+                <div class="botones-tarjeta">
+                    <a class="tarjeta-btn trigger-popup" data-programa="salsa">🎧 App</a>
+                    <a href="https://www.mixcloud.com/ByJTB/" target="_blank" class="tarjeta-btn-mixcloud">☁️ Mixcloud</a>
+                </div>
             </div>
-            <div class="tarjeta trigger-popup" data-programa="rock">
+            <!-- TARJETA ROCK -->
+            <div class="tarjeta">
                 <img src="rock.jpg" alt="Old School Rock">
                 <p>Sube el volumen y disfruta de los himnos distorsionados que marcaron historia.</p>
-                <div class="tarjeta-btn">Escuchar Ahora ➔</div>
+                <div class="botones-tarjeta">
+                    <a class="tarjeta-btn trigger-popup" data-programa="rock">🎧 App</a>
+                    <a href="https://www.mixcloud.com/oldschoolradio/" target="_blank" class="tarjeta-btn-mixcloud">☁️ Mixcloud</a>
+                </div>
             </div>
         </div>
     </section>
@@ -563,7 +666,7 @@
             closeQRBtn.addEventListener('click', () => { modalQR.classList.remove('mostrar'); });
             window.addEventListener('click', (e) => { if (e.target === modalQR) { modalQR.classList.remove('mostrar'); }});
 
-            // 3. LÓGICA DEL REPRODUCTOR (ABRE EN PESTAÑA LIMPIA 100% BLINDADA)
+            // 3. LÓGICA DEL REPRODUCTOR APP (ABRE EN PESTAÑA LIMPIA 100% BLINDADA)
             const triggersPopup = document.querySelectorAll('.trigger-popup');
 
             triggersPopup.forEach(trigger => {
