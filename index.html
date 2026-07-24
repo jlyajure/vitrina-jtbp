@@ -6,13 +6,13 @@
     <title>JazzTaBueno Productions | Premium</title>
     
     <!-- === LOGO EN LA PESTAÑA DEL NAVEGADOR (FAVICON) === -->
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
     
     <!-- === TARJETA DE PRESENTACIÓN PARA WHATSAPP Y REDES (OPEN GRAPH) === -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="JazzTaBueno Productions | Premium">
     <meta property="og:description" content="El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock. Escucha nuestros programas exclusivos.">
-    <meta property="og:image" itemprop="image" content="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png">
+    <meta property="og:image" itemprop="image" content="logo.jpg">
     <meta property="og:url" content="https://vitrina-jtbp.vercel.app/">
     <meta property="og:site_name" content="JazzTaBueno Productions">
     
@@ -374,7 +374,6 @@
         .info-artista { padding: 25px; }
         .info-artista h4 { color: #e5a93d; font-size: 1.5rem; margin-bottom: 10px; font-weight: 700;}
 
-        /* FIX: Colores del nombre del programa y ajuste de línea múltiple */
         .info-artista .genero { 
             display: inline-block; 
             font-size: 0.75rem; 
@@ -386,7 +385,7 @@
             margin-bottom: 15px; 
             color: #000; 
             font-weight: 700;
-            line-height: 1.2; /* Permite que el salto de línea quede bien juntito */
+            line-height: 1.2; 
         }
 
         .info-artista p {
@@ -455,12 +454,11 @@
         .footer-logo img {
             height: 60px;
             mix-blend-mode: screen;
-            filter: grayscale(100%);
-            transition: filter 0.3s ease;
+            transition: filter 0.3s ease, transform 0.3s ease;
         }
 
         .footer-logo img:hover {
-            filter: grayscale(0%);
+            transform: scale(1.05);
         }
 
         .footer-copy {
@@ -660,7 +658,7 @@
 
     <header class="navbar" id="navbar">
         <div class="logo">
-            <img src="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
+            <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
         </div>
         <nav>
             <ul>
@@ -762,7 +760,7 @@
     <!-- === PIE DE PÁGINA (FOOTER) === -->
     <footer class="footer">
         <div class="footer-logo">
-            <img src="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=\'color:#e5a93d; font-size:1.2rem;\'>JAZZTABUENO</h3>'">
+            <img src="logo.jpg" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=\'color:#e5a93d; font-size:1.2rem;\'>JAZZTABUENO</h3>'">
         </div>
         <div class="footer-copy">
             &copy; 2026 JazzTaBueno Productions. Todos los derechos reservados.
@@ -844,7 +842,6 @@
                     contenedorLeyendas.innerHTML = ''; 
                     carteleraSemanal.forEach((artista) => {
                         
-                        // FIX: Interceptamos el texto que viene de Firebase para forzar el diseño de Old School
                         let nombreGenero = artista.genero;
                         if (nombreGenero.toLowerCase().includes("old school") || nombreGenero.toLowerCase().includes("rock radio")) {
                             nombreGenero = "OLD SCHOOL<br>ROCK RADIO";
