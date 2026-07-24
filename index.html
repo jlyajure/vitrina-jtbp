@@ -246,75 +246,6 @@
         
         .btn-modal { background-color: transparent; border: 2px solid #e5a93d; color: #e5a93d; padding: 12px 30px; border-radius: 30px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
         .btn-modal:hover { background-color: #e5a93d; color: #000; }
-
-        /* === MINI-APP FLOTANTE PARA ESCUCHAR (Picture-in-Picture) === */
-        #mini-app-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 360px;
-            height: 600px; 
-            background-color: #000;
-            border: 2px solid #e5a93d;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transform: translateY(150%);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        #mini-app-container.mostrar {
-            transform: translateY(0);
-        }
-        
-        .mini-app-header {
-            background-color: #111;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-        }
-        
-        .mini-app-header span.titulo {
-            color: #e5a93d;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .cerrar-mini-app {
-            color: #fff;
-            font-size: 28px;
-            line-height: 1;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .cerrar-mini-app:hover { color: #ff3333; }
-        
-        #mini-app-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #0a0a0a;
-        }
-
-        @media (max-width: 768px) {
-            #mini-app-container {
-                width: 90%;
-                height: 80%;
-                bottom: 5%;
-                right: 5%;
-            }
-        }
     </style>
 </head>
 <body>
@@ -338,29 +269,29 @@
         <div class="hero-contenido">
             <h1>JAZZTABUENO <span class="resaltado">PRODUCTIONS</span></h1>
             <p>El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock.</p>
-            <a class="btn-latido trigger-mini-app" data-programa="inicio">🎧 Escuchar en la App</a>
+            <a class="btn-latido trigger-popup" data-programa="inicio">🎧 Escuchar en la App</a>
         </div>
     </section>
 
     <section id="programas" class="seccion-oscura">
         <h2 class="section-title">El <span>Sonido</span></h2>
         <div class="grid-programas">
-            <div class="tarjeta trigger-mini-app" data-programa="jazz">
-                <img src="jazz.jpg" alt="Jazztabueno">
+            <div class="tarjeta trigger-popup" data-programa="jazz">
+                <img src="jazz.jpg" alt="Jazztabueno" onerror="this.src='https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=600&auto=format&fit=crop'">
                 <p>Una fina selección de trompetas, saxofones y el mejor ambiente del Jazz clásico para tus oídos.</p>
                 <div class="tarjeta-btn">Escuchar Ahora ➔</div>
             </div>
-            <div class="tarjeta trigger-mini-app" data-programa="studio79">
+            <div class="tarjeta trigger-popup" data-programa="studio79">
                 <img src="studio.jpg" alt="Studio 79">
                 <p>Enciende la bola de espejos y disfruta de los grandes hits de los 70s y 80s sin interrupciones.</p>
                 <div class="tarjeta-btn">Escuchar Ahora ➔</div>
             </div>
-            <div class="tarjeta trigger-mini-app" data-programa="salsa">
+            <div class="tarjeta trigger-popup" data-programa="salsa">
                 <img src="salsa.jpg" alt="Salsa Brava">
                 <p>El verdadero sabor de la clave y las leyendas de la percusión caribeña, directo a tu teléfono.</p>
                 <div class="tarjeta-btn">Escuchar Ahora ➔</div>
             </div>
-            <div class="tarjeta trigger-mini-app" data-programa="rock">
+            <div class="tarjeta trigger-popup" data-programa="rock">
                 <img src="rock.jpg" alt="Old School Rock">
                 <p>Sube el volumen y disfruta de los himnos distorsionados que marcaron historia.</p>
                 <div class="tarjeta-btn">Escuchar Ahora ➔</div>
@@ -375,6 +306,7 @@
         </div>
     </section>
 
+    <!-- MODAL DEL CÓDIGO QR -->
     <div id="qr-modal" class="modal">
         <div class="modal-content">
             <span class="close-qr-btn">&times;</span>
@@ -387,14 +319,6 @@
             <p style="font-size: 0.85rem; color: #888;">Escanea el código con tu móvil o presiona el botón abajo</p>
             <a href="https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/" target="_blank" class="btn-modal">Abrir JTBP App</a>
         </div>
-    </div>
-
-    <div id="mini-app-container">
-        <div class="mini-app-header">
-            <span class="titulo">📻 Reproductor JTBP</span>
-            <span class="cerrar-mini-app">&times;</span>
-        </div>
-        <iframe id="mini-app-frame" src="" allow="autoplay; encrypted-media"></iframe>
     </div>
 
     <!-- SCRIPT LOGICO -->
@@ -479,29 +403,22 @@
             closeQRBtn.addEventListener('click', () => { modalQR.classList.remove('mostrar'); });
             window.addEventListener('click', (e) => { if (e.target === modalQR) { modalQR.classList.remove('mostrar'); }});
 
-            // 3. LÓGICA DE LA MINI-APP CON LLAVE MAESTRA (PARÁMETROS)
-            const miniAppContainer = document.getElementById('mini-app-container');
-            const iframeMiniApp = document.getElementById('mini-app-frame');
-            const triggersMiniApp = document.querySelectorAll('.trigger-mini-app');
-            const cerrarMiniApp = document.querySelector('.cerrar-mini-app');
+            // 3. LÓGICA DEL NUEVO POP-UP (PLAN B - ANTI-BLOQUEOS)
+            const triggersPopup = document.querySelectorAll('.trigger-popup');
 
-            triggersMiniApp.forEach(trigger => {
+            triggersPopup.forEach(trigger => {
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
                     // Extraemos la llave maestra (ej: "jazz", "salsa")
                     const señal = trigger.getAttribute('data-programa');
                     
-                    // Obligamos a la ventana a cargar con la señal exacta apuntando a PRODUCCIÓN
-                    iframeMiniApp.src = `https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/?programa=${señal}`;
+                    // El enlace oficial de Producción con la señal inyectada
+                    const appUrl = `https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/?programa=${señal}`;
                     
-                    miniAppContainer.classList.add('mostrar');
+                    // Obligamos al navegador a abrir una ventana externa miniatura
+                    // Especificamos un tamaño simulando la pantalla de un celular
+                    window.open(appUrl, "ReproductorJTBP", "width=420,height=650,menubar=no,toolbar=no,location=no,status=no");
                 });
-            });
-
-            cerrarMiniApp.addEventListener('click', () => {
-                miniAppContainer.classList.remove('mostrar');
-                // Opcional: Detenemos la app cuando el usuario cierra la ventana
-                iframeMiniApp.src = "";
             });
         });
     </script>
