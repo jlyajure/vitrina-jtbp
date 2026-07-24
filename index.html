@@ -85,6 +85,65 @@
             color: #e5a93d; 
         }
 
+        /* === WIDGET "EN ROTACIÓN" (TICKER DE PODCASTS) === */
+        .live-ticker-bar {
+            position: absolute;
+            top: 130px; 
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            border-top: 1px solid rgba(229, 169, 61, 0.3);
+            border-bottom: 1px solid rgba(229, 169, 61, 0.3);
+            padding: 10px 20px;
+            z-index: 9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .live-ticker-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #ddd;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .live-badge {
+            background-color: #e5a93d;
+            color: #000;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 10px rgba(229, 169, 61, 0.6);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #000;
+            border-radius: 50%;
+            animation: pulse-gold-dot 1.5s infinite;
+        }
+
+        @keyframes pulse-gold-dot {
+            0% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7); }
+            70% { transform: scale(1); opacity: 0.4; box-shadow: 0 0 0 8px rgba(0, 0, 0, 0); }
+            100% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+        }
+
+        .ticker-text span {
+            color: #e5a93d;
+            font-weight: 600;
+        }
+
         /* === SECCIÓN PRINCIPAL (HERO) === */
         .hero {
             position: relative;
@@ -269,7 +328,17 @@
             .navbar .logo img { height: 75px; }
             .navbar nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
             .navbar nav ul li a { font-size: 12px; }
-            .hero-contenido { margin-top: 100px; padding: 15px; }
+            
+            /* Ajuste del Ticker en móvil */
+            .live-ticker-bar {
+                top: 115px;
+                padding: 8px 10px;
+            }
+            .live-ticker-content {
+                font-size: 0.75rem;
+            }
+
+            .hero-contenido { margin-top: 120px; padding: 15px; }
             .hero-contenido h1 { font-size: 2.2rem; }
             .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
             .btn-latido { padding: 15px 30px; font-size: 1rem; }
@@ -319,7 +388,7 @@
             .info-artista p {
                 font-size: 0.8rem;
                 max-height: 80px;
-                text-align: left; /* CORRECCIÓN: Alineado a la izquierda para evitar espacios gigantes */
+                text-align: left;
             }
 
             .modal-content { padding: 30px 20px; }
@@ -342,6 +411,18 @@
             </ul>
         </nav>
     </header>
+
+    <!-- WIDGET "EN ROTACIÓN" (PODCASTS Y ESPECIALES) -->
+    <div class="live-ticker-bar">
+        <div class="live-ticker-content">
+            <div class="live-badge">
+                <div class="pulse-dot"></div> EN ROTACIÓN
+            </div>
+            <div class="ticker-text">
+                Programas exclusivos y podcasts: <span>Jazz Clásico, Studio 79, Salsa Brava y Old School Rock</span>
+            </div>
+        </div>
+    </div>
 
     <section id="inicio" class="hero">
         <div class="overlay"></div>
@@ -482,7 +563,7 @@
             closeQRBtn.addEventListener('click', () => { modalQR.classList.remove('mostrar'); });
             window.addEventListener('click', (e) => { if (e.target === modalQR) { modalQR.classList.remove('mostrar'); }});
 
-            // 3. LÓGICA DEL REPRODUCTOR (ABRE EN PESTAÑA LIMPIA)
+            // 3. LÓGICA DEL REPRODUCTOR (ABRE EN PESTAÑA LIMPIA 100% BLINDADA)
             const triggersPopup = document.querySelectorAll('.trigger-popup');
 
             triggersPopup.forEach(trigger => {
