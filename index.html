@@ -6,13 +6,14 @@
     <title>JazzTaBueno Productions | Premium</title>
     
     <!-- === LOGO EN LA PESTAÑA DEL NAVEGADOR (FAVICON) === -->
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png">
+    <link rel="icon" type="image/png" href="logo.png">
     
     <!-- === TARJETA DE PRESENTACIÓN PARA WHATSAPP Y REDES (OPEN GRAPH) === -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="JazzTaBueno Productions | Premium">
     <meta property="og:description" content="El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock. Escucha nuestros programas exclusivos.">
-    <meta property="og:image" itemprop="image" content="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png">
+    <meta property="og:image" itemprop="image" content="https://vitrina-jtbp.vercel.app/logo.png">
+    <meta property="og:url" content="https://vitrina-jtbp.vercel.app/">
     <meta property="og:site_name" content="JazzTaBueno Productions">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -265,49 +266,63 @@
                 gap: 15px;
                 text-align: center;
             }
-            .navbar .logo img {
-                height: 75px; /* Logo un poco más pequeño en celular */
+            .navbar .logo img { height: 75px; }
+            .navbar nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .navbar nav ul li a { font-size: 12px; }
+            .hero-contenido { margin-top: 100px; padding: 15px; }
+            .hero-contenido h1 { font-size: 2.2rem; }
+            .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
+            .btn-latido { padding: 15px 30px; font-size: 1rem; }
+            
+            .section-title { font-size: 2.2rem; margin-bottom: 40px; }
+            .seccion-oscura, .seccion-gris { padding: 40px 15px; }
+
+            /* Ajuste Arquitectónico para Tarjetas de Programas (2 Columnas) */
+            .grid-programas {
+                grid-template-columns: repeat(2, 1fr); /* Fuerza 2 columnas lado a lado */
+                gap: 12px; /* Espacio más ajustado */
             }
-            .navbar nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
+            .tarjeta {
+                padding: 15px 10px; /* Menos espacio interno */
             }
-            .navbar nav ul li a {
-                font-size: 12px;
+            .tarjeta img {
+                height: 90px; /* Imágenes mucho más pequeñas y sutiles */
+                margin-bottom: 10px;
             }
-            .hero-contenido {
-                margin-top: 100px; /* Dale espacio para que no choque con el menú */
-                padding: 15px;
+            .tarjeta p {
+                font-size: 0.75rem; /* Texto descriptivo más pequeño */
+                margin-bottom: 10px;
+                line-height: 1.4;
             }
-            .hero-contenido h1 {
-                font-size: 2.2rem; /* Letra ajustada para pantallas pequeñas */
-            }
-            .hero-contenido p {
-                font-size: 1rem;
-                margin-bottom: 30px;
-            }
-            .btn-latido {
-                padding: 15px 30px;
-                font-size: 1rem;
-            }
-            .section-title {
-                font-size: 2.2rem;
-                margin-bottom: 40px;
-            }
-            .seccion-oscura, .seccion-gris {
-                padding: 60px 20px;
-            }
+            .tarjeta-btn { font-size: 0.7rem; }
+
+            /* Ajuste Arquitectónico para Leyendas de la Música (2 Columnas) */
             .grid-artistas {
-                /* Esto hace que las tarjetas de las leyendas bajen una debajo de la otra */
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: repeat(2, 1fr); /* Fuerza 2 columnas lado a lado */
+                gap: 12px;
             }
-            .modal-content {
-                padding: 30px 20px;
+            .tarjeta-artista img {
+                height: 160px; /* Reduce la foto del artista a la mitad (era 300px) */
             }
-            .modal-content h3 {
-                font-size: 1.5rem;
+            .info-artista {
+                padding: 15px 10px;
             }
+            .info-artista h4 {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+            .info-artista .genero {
+                font-size: 0.65rem;
+                padding: 4px 8px;
+                margin-bottom: 8px;
+            }
+            .info-artista p {
+                font-size: 0.8rem;
+                max-height: 80px; /* Evita que el texto largo estire la tarjeta */
+            }
+
+            .modal-content { padding: 30px 20px; }
+            .modal-content h3 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -479,7 +494,6 @@
                     const appUrl = `https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/?programa=${señal}`;
                     
                     // Obligamos al navegador a abrir una ventana externa miniatura
-                    // Especificamos un tamaño simulando la pantalla de un celular
                     window.open(appUrl, "ReproductorJTBP", "width=420,height=650,menubar=no,toolbar=no,location=no,status=no");
                 });
             });
