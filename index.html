@@ -236,6 +236,7 @@
             display: inline-block;
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
             animation: pulse-gold 2s infinite;
+            text-align: center;
         }
 
         .btn-latido:hover {
@@ -245,8 +246,8 @@
 
         .btn-secundario {
             background: transparent;
-            color: #e5a93d;
-            border: 2px solid #e5a93d;
+            color: #fff;
+            border: 2px solid #5000ff; /* Color Mixcloud */
             padding: 16px 40px;
             font-size: 1.1rem;
             font-weight: 700;
@@ -257,11 +258,12 @@
             letter-spacing: 1px;
             text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
 
         .btn-secundario:hover {
-            background: #e5a93d;
-            color: #000;
+            background: #5000ff; /* Color Mixcloud */
+            color: #fff;
             transform: translateY(-5px);
         }
 
@@ -325,13 +327,23 @@
             cursor: pointer;
             flex: 1;
             min-width: 100px;
+            text-align: center;
         }
 
         .tarjeta-btn { background-color: #e5a93d; color: #000; border: 1px solid #e5a93d;}
         .tarjeta-btn:hover { background-color: #f7bb50; border-color: #f7bb50;}
 
-        .tarjeta-btn-mixcloud { background-color: transparent; color: #ccc; border: 1px solid #444; }
-        .tarjeta-btn-mixcloud:hover { border-color: #e5a93d; color: #fff; }
+        /* FIX: Color Mixcloud App Integrado */
+        .tarjeta-btn-mixcloud { 
+            background-color: transparent; 
+            color: #fff; 
+            border: 2px solid #5000ff; /* Morado Mixcloud */
+        }
+        .tarjeta-btn-mixcloud:hover { 
+            background-color: #5000ff; 
+            border-color: #5000ff; 
+            color: #fff; 
+        }
 
         /* === SECCIÓN ARTISTAS FIRESTORE === */
         .grid-artistas {
@@ -363,21 +375,19 @@
         .info-artista { padding: 25px; }
         .info-artista h4 { color: #e5a93d; font-size: 1.5rem; margin-bottom: 10px; font-weight: 700;}
 
-        /* FIX: Colores del nombre del programa (Género) para que resalten más */
         .info-artista .genero { 
             display: inline-block; 
             font-size: 0.75rem; 
             text-transform: uppercase; 
             letter-spacing: 1px; 
-            background-color: #e5a93d; /* Fondo dorado */
+            background-color: #e5a93d; 
             padding: 5px 10px; 
             border-radius: 5px; 
             margin-bottom: 15px; 
-            color: #000; /* Letras negras */
+            color: #000; 
             font-weight: 700;
         }
 
-        /* FIX: Alineación de texto siempre a la izquierda para evitar espacios gigantes */
         .info-artista p {
             font-size: 0.95rem; 
             color: #bbb; 
@@ -416,7 +426,7 @@
             line-height: 1.8;
             color: #ccc;
             margin-bottom: 20px;
-            text-align: left; /* Eliminamos justify que causa huecos feos */
+            text-align: left; 
             font-weight: 300;
         }
 
@@ -533,7 +543,6 @@
             
             #btn-compartir { padding: 4px 10px; font-size: 11px; }
 
-            /* FIX: Bajamos drásticamente el Ticker para que no choque con el menú que creció */
             .live-ticker-bar {
                 top: 210px;
                 padding: 10px;
@@ -544,7 +553,6 @@
                 font-size: 0.75rem;
             }
 
-            /* FIX: Bajamos el contenido del Hero para darle espacio al Ticker */
             .hero-contenido { margin-top: 250px; padding: 15px; } 
             .hero-contenido h1 { font-size: 2.2rem; }
             .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
@@ -580,14 +588,22 @@
                 line-height: 1.4;
             }
             
+            /* FIX ANTI-CHOQUE: Se agrega un margen inferior forzado al botón de la App */
             .botones-tarjeta {
                 padding-top: 12px;
                 flex-direction: column; 
-                gap: 8px;
+                display: block; /* Se cambia a bloque para respetar el margen */
+            }
+            .tarjeta-btn { 
+                margin-bottom: 12px; /* Margen real que empuja el botón de Mixcloud hacia abajo */
+                display: block;
+            }
+            .tarjeta-btn-mixcloud {
+                display: block;
             }
             .tarjeta-btn, .tarjeta-btn-mixcloud { 
-                font-size: 0.65rem; 
-                padding: 8px 5px; 
+                font-size: 0.75rem; 
+                padding: 10px 5px; 
                 width: 100%;
             }
 
@@ -606,7 +622,6 @@
                 margin-bottom: 5px;
             }
             
-            /* En móvil los géneros se mantienen consistentes con el diseño de PC */
             .info-artista .genero {
                 font-size: 0.65rem;
                 padding: 4px 8px;
@@ -615,7 +630,7 @@
             .info-artista p {
                 font-size: 0.8rem;
                 max-height: 80px;
-                text-align: left; /* Prevención definitiva contra espacios feos en móvil */
+                text-align: left; 
             }
 
             .contenido-nosotros {
@@ -747,7 +762,7 @@
     <!-- === PIE DE PÁGINA (FOOTER) === -->
     <footer class="footer">
         <div class="footer-logo">
-            <img src="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style='color:#e5a93d; font-size:1.2rem;'>JAZZTABUENO</h3>'">
+            <img src="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=\'color:#e5a93d; font-size:1.2rem;\'>JAZZTABUENO</h3>'">
         </div>
         <div class="footer-copy">
             &copy; 2026 JazzTaBueno Productions. Todos los derechos reservados.
