@@ -247,7 +247,7 @@
         .btn-secundario {
             background: transparent;
             color: #fff;
-            border: 2px solid #5000ff; /* Color Mixcloud */
+            border: 2px solid #5000ff; 
             padding: 16px 40px;
             font-size: 1.1rem;
             font-weight: 700;
@@ -262,7 +262,7 @@
         }
 
         .btn-secundario:hover {
-            background: #5000ff; /* Color Mixcloud */
+            background: #5000ff; 
             color: #fff;
             transform: translateY(-5px);
         }
@@ -333,11 +333,10 @@
         .tarjeta-btn { background-color: #e5a93d; color: #000; border: 1px solid #e5a93d;}
         .tarjeta-btn:hover { background-color: #f7bb50; border-color: #f7bb50;}
 
-        /* FIX: Color Mixcloud App Integrado */
         .tarjeta-btn-mixcloud { 
             background-color: transparent; 
             color: #fff; 
-            border: 2px solid #5000ff; /* Morado Mixcloud */
+            border: 2px solid #5000ff; 
         }
         .tarjeta-btn-mixcloud:hover { 
             background-color: #5000ff; 
@@ -375,6 +374,7 @@
         .info-artista { padding: 25px; }
         .info-artista h4 { color: #e5a93d; font-size: 1.5rem; margin-bottom: 10px; font-weight: 700;}
 
+        /* FIX: Colores del nombre del programa y ajuste de línea múltiple */
         .info-artista .genero { 
             display: inline-block; 
             font-size: 0.75rem; 
@@ -386,6 +386,7 @@
             margin-bottom: 15px; 
             color: #000; 
             font-weight: 700;
+            line-height: 1.2; /* Permite que el salto de línea quede bien juntito */
         }
 
         .info-artista p {
@@ -588,14 +589,13 @@
                 line-height: 1.4;
             }
             
-            /* FIX ANTI-CHOQUE: Se agrega un margen inferior forzado al botón de la App */
             .botones-tarjeta {
                 padding-top: 12px;
                 flex-direction: column; 
-                display: block; /* Se cambia a bloque para respetar el margen */
+                display: block; 
             }
             .tarjeta-btn { 
-                margin-bottom: 12px; /* Margen real que empuja el botón de Mixcloud hacia abajo */
+                margin-bottom: 12px; 
                 display: block;
             }
             .tarjeta-btn-mixcloud {
@@ -843,11 +843,18 @@
 
                     contenedorLeyendas.innerHTML = ''; 
                     carteleraSemanal.forEach((artista) => {
+                        
+                        // FIX: Interceptamos el texto que viene de Firebase para forzar el diseño de Old School
+                        let nombreGenero = artista.genero;
+                        if (nombreGenero.toLowerCase().includes("old school") || nombreGenero.toLowerCase().includes("rock radio")) {
+                            nombreGenero = "OLD SCHOOL<br>ROCK RADIO";
+                        }
+
                         const tarjetaHTML = `
                             <div class="tarjeta-artista">
                                 <img src="${artista.img}" alt="${artista.nombre}" onerror="this.onerror=null; this.src='https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png'">
                                 <div class="info-artista">
-                                    <span class="genero">${artista.genero}</span>
+                                    <span class="genero">${nombreGenero}</span>
                                     <h4>${artista.nombre}</h4>
                                     <p>${artista.desc}</p>
                                 </div>
