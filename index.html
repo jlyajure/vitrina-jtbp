@@ -54,24 +54,67 @@
             align-items: center;
         }
 
-        /* EFECTO NEÓN Y EXPANSIÓN PARA EL LOGO PRINCIPAL PNG */
-        .navbar .logo img {
-            height: 110px; 
-            animation: latido-neon 2.5s infinite ease-in-out;
+        /* === EFECTO DE BARRIDO DE LUZ (NEÓN) PARA EL LOGO === */
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
             cursor: pointer;
+            /* Mantiene el latido suave de fondo */
+            animation: latido-base 3s infinite ease-in-out;
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        .navbar .logo img:hover {
-            animation: none; 
-            transform: scale(1.1);
-            filter: brightness(1.4); 
+        .logo-wrapper img {
+            height: 110px; 
+            display: block; /* Importante para que el wrapper tome su tamaño exacto */
         }
 
-        @keyframes latido-neon {
+        /* El destello que pasa de izquierda a derecha */
+        .logo-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            /* El color de la luz que barre */
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+            transform: skewX(-25deg);
+            animation: barrido-luz 3s infinite;
+            /* Enmascarado para que el brillo solo afecte a las letras y no al aire */
+            -webkit-mask-image: url('logo.png');
+            -webkit-mask-size: 100% 100%;
+            -webkit-mask-repeat: no-repeat;
+            mask-image: url('logo.png');
+            mask-size: 100% 100%;
+            mask-repeat: no-repeat;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        .logo-wrapper:hover {
+            animation: none; 
+            transform: scale(1.1);
+            filter: brightness(1.3) drop-shadow(0 0 10px rgba(80, 0, 255, 0.5)); 
+        }
+
+        /* Congela el destello si pasan el mouse por encima */
+        .logo-wrapper:hover::after {
+            animation: none;
+            display: none; 
+        }
+
+        @keyframes latido-base {
             0% { transform: scale(0.98); filter: brightness(1); }
-            50% { transform: scale(1.05); filter: brightness(1.25); }
+            50% { transform: scale(1.02); filter: brightness(1.15); }
             100% { transform: scale(0.98); filter: brightness(1); }
+        }
+
+        @keyframes barrido-luz {
+            0% { left: -100%; opacity: 0; }
+            20% { opacity: 1; }
+            50% { left: 200%; opacity: 1; }
+            100% { left: 200%; opacity: 0; } /* Pausa invisible antes de volver a empezar */
         }
 
         .navbar nav ul {
@@ -543,7 +586,9 @@
                 gap: 15px;
                 text-align: center;
             }
-            .navbar .logo img { height: 75px; } 
+            
+            /* Ajuste exacto para el wrapper en móviles */
+            .logo-wrapper img { height: 75px; } 
             
             .navbar nav ul { 
                 gap: 10px 15px; 
@@ -670,7 +715,10 @@
 
     <header class="navbar" id="navbar">
         <div class="logo">
-            <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
+            <!-- AQUÍ ENVOLVEMOS EL LOGO PARA PODER APLICARLE EL HAZ DE LUZ PERFECTO -->
+            <div class="logo-wrapper" title="JazzTaBueno Productions">
+                <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
+            </div>
         </div>
         <nav>
             <ul>
