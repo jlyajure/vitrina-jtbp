@@ -6,13 +6,13 @@
     <title>JazzTaBueno Productions | Premium</title>
     
     <!-- === LOGO EN LA PESTAÑA DEL NAVEGADOR (FAVICON) === -->
-    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png">
     
     <!-- === TARJETA DE PRESENTACIÓN PARA WHATSAPP Y REDES (OPEN GRAPH) === -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="JazzTaBueno Productions | Premium">
     <meta property="og:description" content="El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock. Escucha nuestros programas exclusivos.">
-    <meta property="og:image" itemprop="image" content="https://vitrina-jtbp.vercel.app/logo.png">
+    <meta property="og:image" itemprop="image" content="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png">
     <meta property="og:url" content="https://vitrina-jtbp.vercel.app/">
     <meta property="og:site_name" content="JazzTaBueno Productions">
     
@@ -258,7 +258,7 @@
         .btn-modal { background-color: transparent; border: 2px solid #e5a93d; color: #e5a93d; padding: 12px 30px; border-radius: 30px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
         .btn-modal:hover { background-color: #e5a93d; color: #000; }
 
-        /* === RESPONSIVE DESIGN (ADAPTACIÓN PARA CELULARES) === */
+        /* === RESPONSIVE DESIGN (ADAPTACIÓN MÓVIL OPTIMIZADA) === */
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 20px;
@@ -277,32 +277,32 @@
             .section-title { font-size: 2.2rem; margin-bottom: 40px; }
             .seccion-oscura, .seccion-gris { padding: 40px 15px; }
 
-            /* Ajuste Arquitectónico para Tarjetas de Programas (2 Columnas) */
+            /* Tarjetas de Programas a 2 columnas equilibradas */
             .grid-programas {
-                grid-template-columns: repeat(2, 1fr); /* Fuerza 2 columnas lado a lado */
-                gap: 12px; /* Espacio más ajustado */
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
             }
             .tarjeta {
-                padding: 15px 10px; /* Menos espacio interno */
+                padding: 15px 10px;
             }
             .tarjeta img {
-                height: 90px; /* Imágenes mucho más pequeñas y sutiles */
+                height: 90px;
                 margin-bottom: 10px;
             }
             .tarjeta p {
-                font-size: 0.75rem; /* Texto descriptivo más pequeño */
+                font-size: 0.75rem;
                 margin-bottom: 10px;
                 line-height: 1.4;
             }
             .tarjeta-btn { font-size: 0.7rem; }
 
-            /* Ajuste Arquitectónico para Leyendas de la Música (2 Columnas) */
+            /* Tarjetas de Leyendas a 2 columnas equilibradas */
             .grid-artistas {
-                grid-template-columns: repeat(2, 1fr); /* Fuerza 2 columnas lado a lado */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
             .tarjeta-artista img {
-                height: 160px; /* Reduce la foto del artista a la mitad (era 300px) */
+                height: 150px;
             }
             .info-artista {
                 padding: 15px 10px;
@@ -318,7 +318,7 @@
             }
             .info-artista p {
                 font-size: 0.8rem;
-                max-height: 80px; /* Evita que el texto largo estire la tarjeta */
+                max-height: 80px;
             }
 
             .modal-content { padding: 30px 20px; }
@@ -330,7 +330,7 @@
 
     <header class="navbar" id="navbar">
         <div class="logo">
-            <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
+            <img src="https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
         </div>
         <nav>
             <ul>
@@ -391,11 +391,11 @@
             <h3>Lleva la Radio Contigo</h3>
             <p>Para disfrutar de nuestra programación en máxima calidad y explorar la <strong>Bóveda del Legado</strong>, descarga nuestra App Oficial.</p>
             <div class="qr-box">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/" alt="Escanea para descargar">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vitrina-jtbp.vercel.app/" alt="Escanea para descargar">
             </div>
             <br>
             <p style="font-size: 0.85rem; color: #888;">Escanea el código con tu móvil o presiona el botón abajo</p>
-            <a href="https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/" target="_blank" class="btn-modal">Abrir JTBP App</a>
+            <a href="https://vitrina-jtbp.vercel.app/" target="_blank" class="btn-modal">Abrir JTBP App</a>
         </div>
     </div>
 
@@ -450,7 +450,7 @@
                     carteleraSemanal.forEach((artista) => {
                         const tarjetaHTML = `
                             <div class="tarjeta-artista">
-                                <img src="${artista.img}" alt="${artista.nombre}" onerror="this.onerror=null; this.src='logo.png'">
+                                <img src="${artista.img}" alt="${artista.nombre}" onerror="this.onerror=null; this.src='https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png'">
                                 <div class="info-artista">
                                     <span class="genero">${artista.genero}</span>
                                     <h4>${artista.nombre}</h4>
@@ -487,13 +487,8 @@
             triggersPopup.forEach(trigger => {
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
-                    // Extraemos la llave maestra (ej: "jazz", "salsa")
                     const señal = trigger.getAttribute('data-programa');
-                    
-                    // El enlace oficial de Producción con la señal inyectada
                     const appUrl = `https://jazztabueno-productions-git-main-jose-luis-yajures-projects.vercel.app/?programa=${señal}`;
-                    
-                    // Obligamos al navegador a abrir una ventana externa miniatura
                     window.open(appUrl, "ReproductorJTBP", "width=420,height=650,menubar=no,toolbar=no,location=no,status=no");
                 });
             });
