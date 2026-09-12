@@ -182,8 +182,17 @@
             .navbar nav ul { gap: 10px 15px; flex-wrap: wrap; justify-content: center; }
             .navbar nav ul li a { font-size: 11px; padding: 5px 0;}
             #btn-compartir { padding: 4px 10px; font-size: 11px; }
-            .live-ticker-bar { top: 210px; padding: 10px; }
+            
+            /* ======== AJUSTE DE LA BARRA DE ROTACIÓN (SIN RECTÁNGULO NEGRO) ======== */
+            .live-ticker-bar { 
+                top: 155px; /* Se coloca justo debajo del botón compartir */
+                padding: 10px; 
+                background: transparent; /* Elimina el bloque oscuro */
+                border: none; /* Elimina las líneas */
+                box-shadow: none;
+            }
             .live-ticker-content { flex-direction: column; gap: 8px; font-size: 0.75rem; }
+            
             .hero-contenido { margin-top: 250px; padding: 15px; } 
             .hero-contenido h1 { font-size: 2.2rem; }
             .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
@@ -193,14 +202,15 @@
             .seccion-oscura, .seccion-gris, .seccion-nosotros { padding: 40px 15px; }
             
             /* ======== AJUSTE DEL ENCUADRE DE LA IMAGEN EN CELULAR ======== */
-            /* Obliga a la imagen a mostrar todo su ancho (piano, saxo y contrabajo) y la ubica más arriba */
             .hero-bg {
-                background-size: 100% auto !important; 
-                background-position: center 25% !important; 
+                /* 115% hace que gane altura sin recortar el piano ni el contrabajo */
+                background-size: 115% auto !important; 
+                /* 36% mueve la imagen hacia abajo para que no choque con el texto de Rotación */
+                background-position: center 36% !important; 
             }
-            /* Suavizamos la sombra arriba para que la imagen se vea nítida, y la oscurecemos abajo para leer el texto */
             .overlay {
-                background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,1) 100%) !important;
+                /* Oscurece el techo para que se lea "En rotación" y hace un degradado suave hacia abajo */
+                background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.1) 35%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,1) 100%) !important;
             }
             /* ============================================================= */
 
