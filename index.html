@@ -192,10 +192,17 @@
             .section-title { font-size: 2.2rem; margin-bottom: 40px; }
             .seccion-oscura, .seccion-gris, .seccion-nosotros { padding: 40px 15px; }
             
-            /* Ajuste del encuadre del fondo en celulares para revelar más instrumentos */
+            /* ======== AJUSTE DEL ENCUADRE DE LA IMAGEN EN CELULAR ======== */
+            /* Obliga a la imagen a mostrar todo su ancho (piano, saxo y contrabajo) y la ubica más arriba */
             .hero-bg {
-                background-position: 70% center; 
+                background-size: 100% auto !important; 
+                background-position: center 25% !important; 
             }
+            /* Suavizamos la sombra arriba para que la imagen se vea nítida, y la oscurecemos abajo para leer el texto */
+            .overlay {
+                background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,1) 100%) !important;
+            }
+            /* ============================================================= */
 
             /* Anular efectos 3D que traban la pantalla táctil */
             .card-3d { transform-style: flat; perspective: none; }
