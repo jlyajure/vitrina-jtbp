@@ -3,156 +3,532 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JazzTaBueno Productions</title>
+    <title>JazzTaBueno Productions | Premium</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="JazzTaBueno Productions | Premium">
+    <meta property="og:description" content="El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock. Escucha nuestros programas exclusivos.">
+    <meta property="og:image" itemprop="image" content="logo.png">
+    <meta property="og:url" content="https://vitrina-jtbp.vercel.app/">
+    <meta property="og:site_name" content="JazzTaBueno Productions">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset básico y variables */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: sans-serif; background-color: #0f0f0f; color: #fff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        body { background-color: #0a0a0a; color: white; overflow-x: hidden; }
 
-        /* --- CORRECCIÓN DE ENCUADRE DE IMAGEN --- */
-        .hero-section {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            /* Asegúrate de poner la ruta real de tu imagen aquí */
-            background-image: url('tu-imagen-saxofon.jpg'); 
-            background-size: cover;
-            background-position: center; /* En PC se ve centrada */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+        /* === BARRA DE NAVEGACIÓN === */
+        .navbar { position: absolute; top: 0; width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 10; color: white; }
+        .navbar .logo { display: flex; align-items: center; }
+        .logo-wrapper { position: relative; display: inline-block; cursor: pointer; animation: latido-base 3s infinite ease-in-out; transition: transform 0.3s ease, filter 0.3s ease; }
+        .logo-wrapper img { height: 110px; display: block; }
+        .logo-wrapper::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(105deg, transparent 25%, rgba(255, 255, 255, 0.4) 50%, transparent 75%); background-size: 200% 100%; -webkit-mask-image: url('logo.png'); -webkit-mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-image: url('logo.png'); mask-size: 100% 100%; mask-repeat: no-repeat; pointer-events: none; mix-blend-mode: color-dodge; animation: barrido-luz 3.5s infinite linear; }
+        .logo-wrapper:hover { animation: none; transform: scale(1.1); filter: brightness(1.3) drop-shadow(0 0 12px rgba(80, 0, 255, 0.6)); }
+        .logo-wrapper:hover::after { display: none; }
 
-        /* Ajuste específico para móviles: movemos el foco de la imagen para revelar otros instrumentos */
-        @media (max-width: 768px) {
-            .hero-section {
-                /* Cambia 'left' por 'right' dependiendo de qué lado de la foto estén los otros instrumentos */
-                background-position: left center; 
+        @keyframes latido-base { 0% { transform: scale(0.98); filter: brightness(1); } 50% { transform: scale(1.02); filter: brightness(1.15); } 100% { transform: scale(0.98); filter: brightness(1); } }
+        @keyframes barrido-luz { 0% { background-position: 200% 0; opacity: 0; } 15% { opacity: 1; } 45% { background-position: -100% 0; opacity: 1; } 55% { opacity: 0; } 100% { background-position: -100% 0; opacity: 0; } }
+
+        .navbar nav ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .navbar nav ul li a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s ease; text-transform: uppercase; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .navbar nav ul li a:hover { color: #e5a93d; }
+        #btn-compartir { color: #e5a93d; border: 1px solid #e5a93d; padding: 5px 15px; border-radius: 20px; transition: all 0.3s ease; }
+        #btn-compartir:hover { background-color: #e5a93d; color: #000; }
+
+        /* === WIDGET "EN ROTACIÓN" === */
+        .live-ticker-bar { position: absolute; top: 130px; width: 100%; background: rgba(0, 0, 0, 0.85); border-top: 1px solid rgba(229, 169, 61, 0.3); border-bottom: 1px solid rgba(229, 169, 61, 0.3); padding: 10px 20px; z-index: 9; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .live-ticker-content { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: #ddd; letter-spacing: 0.5px; text-align: center; }
+        .live-badge { background-color: #e5a93d; color: #000; padding: 3px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 6px; box-shadow: 0 0 10px rgba(229, 169, 61, 0.6); white-space: nowrap; flex-shrink: 0; }
+        .pulse-dot { width: 8px; height: 8px; background-color: #000; border-radius: 50%; animation: pulse-gold-dot 1.5s infinite; }
+        @keyframes pulse-gold-dot { 0% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7); } 70% { transform: scale(1); opacity: 0.4; box-shadow: 0 0 0 8px rgba(0, 0, 0, 0); } 100% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); } }
+        .ticker-text span { color: #e5a93d; font-weight: 600; }
+
+        /* === HERO PRINCIPAL === */
+        .hero { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; background-color: #000; --x: 50%; --y: 50%; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('imagen_jtb_web.jpg') center/cover no-repeat; pointer-events: none; }
+        .hero-bg-dark { filter: brightness(0.25) grayscale(0.7); z-index: 0; }
+        
+        .hero-bg-light { filter: brightness(1.4) contrast(1.1) saturate(1.1); z-index: 1; opacity: 1; }
+        @media (min-width: 769px) {
+            .hero-bg-light {
+                -webkit-mask-image: radial-gradient(circle 350px at var(--x) var(--y), rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
+                mask-image: radial-gradient(circle 350px at var(--x) var(--y), rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
+                opacity: 0;
+                transition: opacity 0.5s ease;
             }
+            .hero:hover .hero-bg-light { opacity: 1; }
         }
 
-        /* --- CORRECCIÓN DEL EFECTO FADE-IN --- */
-        .fade-section {
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%); z-index: 2; pointer-events: none; }
+        .hero-contenido { color: white; z-index: 3; max-width: 900px; padding: 20px; margin-top: 50px; pointer-events: auto; }
+        .hero-contenido h1 { font-size: 4.5rem; font-weight: 700; margin-bottom: 10px; letter-spacing: 2px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+        .hero-contenido .resaltado { color: #e5a93d; }
+        .hero-contenido p { font-size: 1.2rem; font-weight: 300; margin-bottom: 40px; color: #e0e0e0; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        
+        .hero-botones { display: flex; justify-content: center; align-items: center; gap: 20px; }
+        .btn-latido { background: linear-gradient(45deg, #d4af37, #aa8c2c); color: #000; border: none; padding: 18px 40px; font-size: 1.1rem; font-weight: 700; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-block; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); animation: pulse-gold 2s infinite; }
+        .btn-latido:hover { transform: translateY(-5px) scale(1.05); background: linear-gradient(45deg, #f7bb50, #d4af37); }
+        .btn-secundario { background: transparent; color: #fff; border: 2px solid #5000ff; padding: 16px 40px; font-size: 1.1rem; font-weight: 700; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-block; }
+        .btn-secundario:hover { background: #5000ff; color: #fff; transform: translateY(-5px); }
+        @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
+
+        /* === ANIMACIÓN DE SCROLL (FADE-IN) === */
+        .scroll-anim {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            padding: 50px 20px;
-            text-align: center;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out, border-color 0.4s ease, box-shadow 0.4s ease;
         }
-
-        .fade-section.visible {
+        .scroll-anim.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 15px 30px;
-            border-radius: 25px;
-            background: transparent;
-            border: 2px solid #b8860b;
-            color: #b8860b;
-            text-decoration: none;
-            font-weight: bold;
+        /* === SECCIÓN DE PROGRAMAS === */
+        .seccion-oscura { padding: 100px 50px; background-color: #0a0a0a; text-align: center; perspective: 1500px; }
+        .seccion-gris { padding: 100px 50px; background-color: #111; text-align: center; }
+        .section-title { font-size: 3rem; margin-bottom: 60px; font-weight: 700; }
+        .section-title span { color: #e5a93d; }
+
+        .grid-programas { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; perspective: 1200px; }
+
+        .tarjeta { 
+            background-color: #000000; 
+            border: 1px solid #222; 
+            padding: 30px 20px; 
+            position: relative; 
+            border-radius: 10px; 
+            display: flex; 
+            flex-direction: column; 
+            transform-style: preserve-3d;
+            will-change: transform;
         }
+
+        .tarjeta:hover { border-color: #e5a93d; box-shadow: 0 15px 30px rgba(0,0,0,0.9), 0 0 15px rgba(229,169,61,0.2); }
         
-        .error-text {
-            color: #ff3333;
-            display: none; /* Oculto por defecto, se muestra si Firebase falla */
-            margin-top: 20px;
+        .tarjeta img.img-programa { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            margin-bottom: 20px; 
+            border-radius: 8px;
+            transform: translateZ(40px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+
+        .tarjeta p { font-size: 0.9rem; color: #888; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; transform: translateZ(30px); pointer-events: none;}
+        .botones-tarjeta { display: flex; gap: 10px; justify-content: center; border-top: 1px solid #222; padding-top: 20px; flex-wrap: wrap; transform: translateZ(35px); }
+
+        .tarjeta-btn, .tarjeta-btn-mixcloud { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; padding: 10px 15px; border-radius: 5px; transition: all 0.2s ease; cursor: pointer; flex: 1; min-width: 100px; text-align: center; }
+        
+        .tarjeta-btn { background-color: transparent; color: #e5a93d; border: 2px solid #e5a93d; }
+        .tarjeta-btn:hover { background-color: #e5a93d; color: #000; transform: scale(1.05); }
+        
+        .tarjeta-btn-mixcloud { background-color: transparent; color: #fff; border: 2px solid #5000ff; }
+        .tarjeta-btn-mixcloud:hover { background-color: #5000ff; border-color: #5000ff; color: #fff; transform: scale(1.05); }
+
+        /* === SECCIÓN ARTISTAS FIRESTORE === */
+        .grid-artistas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1350px; margin: 0 auto; width: 100%; }
+        .tarjeta-artista { background-color: #000; border-radius: 15px; overflow: hidden; text-align: left; border: 1px solid #333; transition: transform 0.3s ease; width: 100%; max-width: 350px; margin: 0 auto; }
+        .tarjeta-artista:hover { transform: translateY(-5px); border-color: #e5a93d; }
+        .tarjeta-artista img { width: 100%; height: 300px; object-fit: cover; object-position: top; background-color: #111; }
+        .info-artista { padding: 25px; }
+        .info-artista h4 { color: #e5a93d; font-size: 1.5rem; margin-bottom: 10px; font-weight: 700;}
+        .info-artista .genero { display: inline-block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; background-color: #e5a93d; padding: 5px 10px; border-radius: 5px; margin-bottom: 15px; color: #000; font-weight: 700; line-height: 1.2; }
+        .info-artista p { font-size: 0.95rem; color: #bbb; line-height: 1.6; text-align: left; max-height: 110px; overflow-y: auto; padding-right: 8px; font-weight: 300; }
+        .info-artista p::-webkit-scrollbar { width: 4px; }
+        .info-artista p::-webkit-scrollbar-track { background: #111; }
+        .info-artista p::-webkit-scrollbar-thumb { background: #aa8c2c; border-radius: 10px; }
+        .mensaje-servidor { grid-column: 1 / -1; text-align: center; color: #e5a93d; font-size: 1.2rem; padding: 40px; }
+
+        /* === SECCIÓN ¿QUIÉNES SOMOS? === */
+        .seccion-nosotros { padding: 100px 50px; background-color: #0a0a0a; text-align: center; }
+        .contenido-nosotros { max-width: 800px; margin: 0 auto; background-color: #000; padding: 50px; border-radius: 15px; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .contenido-nosotros p { font-size: 1.1rem; line-height: 1.8; color: #ccc; margin-bottom: 20px; text-align: left; font-weight: 300; }
+        .contenido-nosotros .firma { color: #e5a93d; font-weight: 700; font-size: 1.2rem; margin-top: 30px; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* === PIE DE PÁGINA === */
+        .footer { background-color: #050505; border-top: 1px solid #222; padding: 40px 50px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-logo img { height: 60px; filter: grayscale(100%); transition: all 0.4s ease; cursor: pointer; }
+        .footer-logo img:hover { filter: grayscale(0%) brightness(1.3); transform: scale(1.1); }
+        .footer-copy { color: #888; font-size: 0.9rem; text-align: center; }
+        .footer-social a { color: #e5a93d; font-size: 1.5rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; display: inline-flex; align-items: center; justify-content: center; }
+        .footer-social a:hover { color: #fff; transform: scale(1.1); }
+
+        /* === MODALES Y TOAST === */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.92); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .modal.mostrar { display: flex; opacity: 1; }
+        .modal-content { background-color: #0a0a0a; padding: 40px; border: 1px solid #aa8c2c; border-radius: 15px; width: 90%; max-width: 500px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9); text-align: center; }
+        .close-qr-btn { color: #e5a93d; position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; transition: color 0.3s ease; }
+        .close-qr-btn:hover { color: #fff; }
+        .modal-content h3 { color: #e5a93d; margin-bottom: 15px; font-size: 2rem; font-weight: 700; letter-spacing: 1px;}
+        .modal-content p { color: #ccc; font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
+        .qr-box { background-color: white; padding: 15px; border-radius: 10px; display: inline-block; margin-bottom: 25px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .qr-box img { width: 150px; height: 150px; display: block; }
+        .btn-modal { background-color: transparent; border: 2px solid #e5a93d; color: #e5a93d; padding: 12px 30px; border-radius: 30px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
+        .btn-modal:hover { background-color: #e5a93d; color: #000; }
+        #toast-compartir { visibility: hidden; min-width: 250px; background-color: #e5a93d; color: #000; text-align: center; border-radius: 30px; padding: 12px 20px; position: fixed; z-index: 3000; left: 50%; bottom: 30px; font-size: 0.9rem; font-weight: bold; transform: translateX(-50%); opacity: 0; transition: opacity 0.5s, bottom 0.5s; }
+        #toast-compartir.mostrar { visibility: visible; opacity: 1; bottom: 50px; }
+
+        /* === CONFIGURACIÓN ESPECIAL PREMIUM PARA CELULARES === */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 10px; flex-direction: column; gap: 15px; text-align: center; }
+            .logo-wrapper img { height: 75px; } 
+            .navbar nav ul { gap: 10px 15px; flex-wrap: wrap; justify-content: center; }
+            .navbar nav ul li a { font-size: 11px; padding: 5px 0;}
+            #btn-compartir { padding: 4px 10px; font-size: 11px; }
+            .live-ticker-bar { top: 210px; padding: 10px; }
+            .live-ticker-content { flex-direction: column; gap: 8px; font-size: 0.75rem; }
+            .hero-contenido { margin-top: 250px; padding: 15px; } 
+            .hero-contenido h1 { font-size: 2.2rem; }
+            .hero-contenido p { font-size: 1rem; margin-bottom: 30px; }
+            .hero-botones { flex-direction: column; gap: 15px; }
+            .btn-latido, .btn-secundario { padding: 15px 30px; font-size: 1rem; width: 100%; max-width: 280px; }
+            .section-title { font-size: 2.2rem; margin-bottom: 40px; }
+            .seccion-oscura, .seccion-gris, .seccion-nosotros { padding: 40px 15px; }
+            
+            /* Ajuste del encuadre del fondo en celulares para revelar más instrumentos */
+            .hero-bg {
+                background-position: 70% center; 
+            }
+
+            /* Anular efectos 3D que traban la pantalla táctil */
+            .card-3d { transform-style: flat; perspective: none; }
+            .tarjeta img.img-programa { transform: none !important; }
+            .tarjeta p { transform: none !important; }
+            .botones-tarjeta { transform: none !important; }
+
+            /* Efecto "Latido Premium" para las tarjetas en móvil */
+            .tarjeta {
+                padding: 15px 10px;
+                animation: mobile-pulse-glow 3s infinite alternate;
+            }
+
+            @keyframes mobile-pulse-glow {
+                0% { box-shadow: 0 5px 15px rgba(0,0,0,0.8); border-color: #222; }
+                100% { box-shadow: 0 5px 20px rgba(229,169,61,0.25); border-color: rgba(229,169,61,0.6); }
+            }
+            
+            /* Efecto respuesta táctil física para los botones */
+            .tarjeta-btn:active, .tarjeta-btn-mixcloud:active, .btn-latido:active, .btn-secundario:active {
+                transform: scale(0.92) !important;
+                transition: transform 0.1s ease !important;
+            }
+            
+            .grid-programas { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .tarjeta img.img-programa { height: 90px; margin-bottom: 10px; }
+            .tarjeta p { font-size: 0.75rem; margin-bottom: 10px; line-height: 1.4; }
+            .botones-tarjeta { padding-top: 12px; flex-direction: column; display: block; }
+            .tarjeta-btn { margin-bottom: 12px; display: block; }
+            .tarjeta-btn-mixcloud { display: block; }
+            .tarjeta-btn, .tarjeta-btn-mixcloud { font-size: 0.75rem; padding: 10px 5px; width: 100%; }
+            .grid-artistas { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .tarjeta-artista img { height: 150px; }
+            .info-artista { padding: 15px 10px; }
+            .info-artista h4 { font-size: 1.1rem; margin-bottom: 5px; }
+            .info-artista .genero { font-size: 0.65rem; padding: 4px 8px; margin-bottom: 8px; }
+            .info-artista p { font-size: 0.8rem; max-height: 80px; text-align: left; }
+            .contenido-nosotros { padding: 25px 15px; }
+            .contenido-nosotros p { font-size: 0.95rem; text-align: left; }
+            .footer { flex-direction: column; text-align: center; padding: 30px 20px; }
+            .footer-copy { order: 3; margin-top: 10px; }
+            .modal-content { padding: 30px 20px; }
+            .modal-content h3 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <section class="hero-section">
-        <h1>JAZZTABUENO PRODUCTIONS</h1>
-        <p>El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock.</p>
-        <div>
-            <a href="#" class="btn">📱 APP OFICIAL</a>
-            <a href="#" class="btn">☁️ MIXCLOUD</a>
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <div class="logo-wrapper" title="JazzTaBueno Productions">
+                <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='JAZZTABUENO'">
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#programas">Música</a></li>
+                <li><a href="#artistas">Leyendas</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a class="trigger-qr">App</a></li>
+                <li><a href="#" id="btn-compartir">Compartir <span>🔗</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="live-ticker-bar scroll-anim">
+        <div class="live-ticker-content">
+            <div class="live-badge"><div class="pulse-dot"></div> EN ROTACIÓN</div>
+            <div class="ticker-text">Programas exclusivos y podcasts: <span>Jazz Clásico, Studio 79, Salsa Brava y Old School Rock</span></div>
+        </div>
+    </div>
+
+    <!-- HERO CON REFLECTOR INTELIGENTE -->
+    <section id="inicio" class="hero">
+        <div class="hero-bg hero-bg-dark"></div>
+        <div class="hero-bg hero-bg-light"></div>
+        <div class="overlay"></div>
+
+        <div class="hero-contenido scroll-anim">
+            <h1>JAZZTABUENO <span class="resaltado">PRODUCTIONS</span></h1>
+            <p>El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock.</p>
+            <div class="hero-botones">
+                <a class="btn-latido trigger-popup" data-programa="inicio">📱 App Oficial</a>
+                <a href="https://www.mixcloud.com/JazzTaBueno/" target="_blank" class="btn-secundario">☁️ Mixcloud</a>
+            </div>
         </div>
     </section>
 
-    <section class="fade-section" id="leyendas">
-        <h2>Leyendas de la Música</h2>
-        <p class="error-text" id="firebase-error">Error de conexión con Firebase.</p>
-        <div id="firebase-data-container">
-            <!-- Los datos de Firebase irán aquí -->
+    <section id="programas" class="seccion-oscura">
+        <h2 class="section-title scroll-anim">El <span>Sonido</span></h2>
+        <div class="grid-programas">
+            <!-- TARJETA JAZZ -->
+            <div class="tarjeta card-3d scroll-anim">
+                <img src="imagen_jtb_web.jpg" class="img-programa" alt="Jazztabueno">
+                <p>Una fina selección de trompetas, saxofones y el mejor ambiente del Jazz clásico para tus oídos.</p>
+                <div class="botones-tarjeta">
+                    <a class="tarjeta-btn trigger-popup" data-programa="jazz">🎧 App</a>
+                    <a href="https://www.mixcloud.com/JazzTaBueno/" target="_blank" class="tarjeta-btn-mixcloud">☁️ Mixcloud</a>
+                </div>
+            </div>
+            
+            <!-- TARJETA STUDIO 79 -->
+            <div class="tarjeta card-3d scroll-anim">
+                <img src="imagen_s79_web.jpg" class="img-programa" alt="Studio 79">
+                <p>Enciende la bola de espejos y disfruta de los grandes hits de los 70s y 80s sin interrupciones.</p>
+                <div class="botones-tarjeta">
+                    <a class="tarjeta-btn trigger-popup" data-programa="studio79">🎧 App</a>
+                    <a href="https://www.mixcloud.com/Studio79/" target="_blank" class="tarjeta-btn-mixcloud">☁️ Mixcloud</a>
+                </div>
+            </div>
+            
+            <!-- TARJETA SALSA -->
+            <div class="tarjeta card-3d scroll-anim">
+                <img src="imagen_sb_web.jpg" class="img-programa" alt="Salsa Brava">
+                <p>El verdadero sabor de la clave y las leyendas de la percusión caribeña, directo a tu teléfono.</p>
+                <div class="botones-tarjeta">
+                    <a class="tarjeta-btn trigger-popup" data-programa="salsa">🎧 App</a>
+                    <a href="https://www.mixcloud.com/ByJTB/" target="_blank" class="tarjeta-btn-mixcloud">☁️ Mixcloud</a>
+                </div>
+            </div>
+            
+            <!-- TARJETA ROCK -->
+            <div class="tarjeta card-3d scroll-anim">
+                <img src="imagen_osrr_web.jpg" class="img-programa" alt="Old School Rock">
+                <p>Sube el volumen y disfruta de los himnos distorsionados que marcaron historia.</p>
+                <div class="botones-tarjeta">
+                    <a class="tarjeta-btn trigger-popup" data-programa="rock">🎧 App</a>
+                    <a href="https://www.mixcloud.com/oldschoolradio/" target="_blank" class="tarjeta-btn-mixcloud">☁️ Mixcloud</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="fade-section">
-        <h2>Nuestra Esencia</h2>
-        <p>Somos un equipo de apasionados por el buen sonido. En JazzTaBueno Productions...</p>
+    <section id="artistas" class="seccion-gris">
+        <h2 class="section-title scroll-anim">Leyendas de la <span>Música</span></h2>
+        <div class="grid-artistas" id="contenedor-leyendas"></div>
     </section>
 
-    <!-- Scripts separados para evitar que un error bloquee toda la página -->
+    <section id="nosotros" class="seccion-nosotros">
+        <h2 class="section-title scroll-anim">Nuestra <span>Esencia</span></h2>
+        <div class="contenido-nosotros scroll-anim">
+            <p>Somos un equipo de apasionados por el buen sonido. En JazzTaBueno Productions no creemos en la música desechable; creemos en el arte que trasciende el tiempo, en los acordes que erizan la piel y en las voces que marcaron a generaciones enteras.</p>
+            <p>Nuestra misión es rescatar la época dorada de las leyendas musicales y llevarla directamente a tus oídos, curando meticulosamente cada programa para que disfrutes de la verdadera esencia del Jazz Clásico, la fiebre de Studio 79, el sabor indiscutible de la Salsa Brava y la rebeldía del Old School Rock.</p>
+            <div class="firma">El Equipo de JTBP</div>
+        </div>
+    </section>
+
+    <footer class="footer scroll-anim">
+        <div class="footer-logo"><img src="logo.png" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=\'color:#e5a93d; font-size:1.2rem;\'>JAZZTABUENO</h3>'"></div>
+        <div class="footer-copy">&copy; 2026 JazzTaBueno Productions. Todos los derechos reservados.</div>
+        <div class="footer-social">
+            <a href="https://instagram.com/jazztabuenooficial" target="_blank">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    <div id="toast-compartir">¡Enlace copiado para compartir! 🎷</div>
+
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-qr-btn">&times;</span>
+            <h3>Lleva la Radio Contigo</h3>
+            <p>Para disfrutar de nuestra programación en máxima calidad y explorar la <strong>Bóveda del Legado</strong>, descarga nuestra App Oficial.</p>
+            <div class="qr-box"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vitrina-jtbp.vercel.app/" alt="Escanea para descargar"></div>
+            <br><p style="font-size: 0.85rem; color: #888;">Escanea el código con tu móvil o presiona el botón abajo</p>
+            <a href="https://vitrina-jtbp.vercel.app/" target="_blank" class="btn-modal">Abrir JTBP App</a>
+        </div>
+    </div>
+
+    <!-- SCRIPT LOGICO REORGANIZADO PARA QUE FIREBASE NO ROMPA LAS ANIMACIONES -->
     <script type="module">
-        // 1. LÓGICA DE APARICIÓN CINEMATOGRÁFICA (Aislada de Firebase)
-        document.addEventListener("DOMContentLoaded", () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-            const observer = new IntersectionObserver((entries, observer) => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            
+            // 1. INICIALIZAR ANIMACIONES DE SCROLL (FADE-IN) ANTES QUE CUALQUIER OTRA COSA
+            const observerOpciones = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+            const animacionScroll = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                         observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, observerOpciones);
 
-            document.querySelectorAll('.fade-section').forEach(section => {
-                observer.observe(section);
+            document.querySelectorAll('.scroll-anim').forEach(el => {
+                animacionScroll.observe(el);
             });
-        });
-    </script>
 
-    <script type="module">
-        // 2. LÓGICA DE FIREBASE (Con manejo de errores para que no rompa la UI)
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+            // 2. MODAL QR
+            const modalQR = document.getElementById('qr-modal');
+            document.querySelectorAll('.trigger-qr').forEach(trigger => {
+                trigger.addEventListener('click', (e) => { e.preventDefault(); modalQR.classList.add('mostrar'); });
+            });
+            document.querySelector('.close-qr-btn').addEventListener('click', () => { modalQR.classList.remove('mostrar'); });
+            window.addEventListener('click', (e) => { if (e.target === modalQR) { modalQR.classList.remove('mostrar'); }});
 
-        // TICO: Asegúrate de que estas variables coincidan exactamente con tu proyecto 
-        // y estén declaradas en las variables de entorno de Vercel.
-        const firebaseConfig = {
-            apiKey: "TU_API_KEY",
-            authDomain: "TU_PROYECTO.firebaseapp.com",
-            projectId: "TU_PROYECTO",
-            storageBucket: "TU_PROYECTO.appspot.com",
-            messagingSenderId: "TU_SENDER_ID",
-            appId: "TU_APP_ID"
-        };
+            // 3. REPRODUCTOR APP
+            document.querySelectorAll('.trigger-popup').forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.open(`https://jazztabueno-productions.vercel.app/?programa=${trigger.getAttribute('data-programa')}`, '_blank');
+                });
+            });
 
-        try {
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app);
-            
-            // Función de prueba para verificar conexión
-            async function testConnection() {
-                try {
-                    const querySnapshot = await getDocs(collection(db, "tu_coleccion"));
-                    console.log("Conexión exitosa. Documentos:", querySnapshot.size);
-                    // Aquí renderizas tus datos
-                } catch (e) {
-                    throw new Error("Permisos denegados o colección inexistente.");
-                }
+            // 4. BOTÓN COMPARTIR
+            const btnCompartir = document.getElementById('btn-compartir');
+            const toastCompartir = document.getElementById('toast-compartir');
+            if (btnCompartir) {
+                btnCompartir.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    if (navigator.share) {
+                        try { await navigator.share({ title: 'JazzTaBueno Productions | Premium', text: 'Escucha la mejor selección de Jazz, Música Retro, Salsa y Rock. ¡Entra y disfruta!', url: window.location.href }); } catch (err) { }
+                    } else {
+                        try {
+                            await navigator.clipboard.writeText(window.location.href);
+                            toastCompartir.classList.add('mostrar');
+                            setTimeout(() => { toastCompartir.classList.remove('mostrar'); }, 3000);
+                        } catch (err) {}
+                    }
+                });
             }
 
-            testConnection();
+            // 5. EFECTO REFLECTOR (SOLO PARA PC / RATÓN)
+            const heroSection = document.querySelector('.hero');
+            if (heroSection && window.innerWidth > 768) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    heroSection.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                    heroSection.style.setProperty('--y', `${e.clientY - rect.top}px`);
+                });
+            }
 
-        } catch (error) {
-            console.error("Fallo al inicializar Firebase:", error);
-            // Mostramos el mensaje de error visualmente en vez de romper la página
-            document.getElementById('firebase-error').style.display = 'block';
-        }
+            // 6. EFECTO PARALLAX 3D (SOLO PARA PC)
+            if (window.innerWidth > 768) {
+                const tarjetas3D = document.querySelectorAll('.card-3d');
+                tarjetas3D.forEach(tarjeta => {
+                    tarjeta.addEventListener('mousemove', (e) => {
+                        const rect = tarjeta.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centroX = rect.width / 2;
+                        const centroY = rect.height / 2;
+                        const rotX = ((y - centroY) / centroY) * -12;
+                        const rotY = ((x - centroX) / centroX) * 12;
+                        tarjeta.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`;
+                        tarjeta.style.transition = "transform 0.1s";
+                    });
+                    tarjeta.addEventListener('mouseleave', () => {
+                        tarjeta.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                        tarjeta.style.transition = "transform 0.5s ease-out";
+                    });
+                });
+            }
+
+            // 7. CARGA DE FIRESTORE (LEYENDAS) - Puesto al final para que no tranque la UI si falla
+            const contenedorLeyendas = document.getElementById('contenedor-leyendas');
+            if(contenedorLeyendas) {
+                contenedorLeyendas.innerHTML = '<div class="mensaje-servidor">Calculando rotación semanal y conectando al servidor...</div>';
+
+                const firebaseConfig = {
+                    apiKey: "AIzaSyARTTMkyEvB-NXe3tMmX5bkSzTBHtOfzOQ",
+                    authDomain: "web-jazztabueno.firebaseapp.com",
+                    projectId: "web-jazztabueno",
+                    storageBucket: "web-jazztabueno.firebasestorage.app",
+                    messagingSenderId: "295302576843",
+                    appId: "1:295302576843:web:9f4d77a2f6e19aa462794e"
+                };
+
+                try {
+                    const app = initializeApp(firebaseConfig);
+                    const db = getFirestore(app);
+                    const querySnapshot = await getDocs(collection(db, "leyendas_activas"));
+                    let todosLosArtistas = [];
+                    querySnapshot.forEach((doc) => { todosLosArtistas.push(doc.data()); });
+
+                    if (todosLosArtistas.length === 0) {
+                        contenedorLeyendas.innerHTML = '<div class="mensaje-servidor" style="color: #bbb;">Aún no hay leyendas cargadas en el servidor.</div>';
+                    } else {
+                        const jazz = todosLosArtistas.filter(a => a.genero.toLowerCase().includes('jazz'));
+                        const studio = todosLosArtistas.filter(a => a.genero.toLowerCase().includes('studio'));
+                        const salsa = todosLosArtistas.filter(a => a.genero.toLowerCase().includes('salsa'));
+                        const rock = todosLosArtistas.filter(a => a.genero.toLowerCase().includes('rock'));
+
+                        const fecha = new Date();
+                        const inicioAño = new Date(fecha.getFullYear(), 0, 1);
+                        const dias = Math.floor((fecha - inicioAño) / (24 * 60 * 60 * 1000));
+                        const semanaActual = Math.ceil((dias + inicioAño.getDay() + 1) / 7);
+
+                        let carteleraSemanal = [];
+                        if(jazz.length > 0) carteleraSemanal.push(jazz[semanaActual % jazz.length]);
+                        if(studio.length > 0) carteleraSemanal.push(studio[semanaActual % studio.length]);
+                        if(salsa.length > 0) carteleraSemanal.push(salsa[semanaActual % salsa.length]);
+                        if(rock.length > 0) carteleraSemanal.push(rock[semanaActual % rock.length]);
+
+                        contenedorLeyendas.innerHTML = ''; 
+                        carteleraSemanal.forEach((artista) => {
+                            let nombreGenero = artista.genero;
+                            if (nombreGenero.toLowerCase().includes("old school") || nombreGenero.toLowerCase().includes("rock radio")) {
+                                nombreGenero = "OLD SCHOOL<br>ROCK RADIO";
+                            }
+                            const tarjetaHTML = `
+                                <div class="tarjeta-artista scroll-anim">
+                                    <img src="${artista.img}" alt="${artista.nombre}" onerror="this.onerror=null; this.src='https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png'">
+                                    <div class="info-artista">
+                                        <span class="genero">${nombreGenero}</span>
+                                        <h4>${artista.nombre}</h4>
+                                        <p>${artista.desc}</p>
+                                    </div>
+                                </div>
+                            `;
+                            contenedorLeyendas.innerHTML += tarjetaHTML;
+                        });
+                        
+                        // Observar las leyendas recién inyectadas para que también tengan fade-in
+                        document.querySelectorAll('.tarjeta-artista.scroll-anim').forEach(el => {
+                            animacionScroll.observe(el);
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error de Firebase: ", error);
+                    // Si falla Firebase, la UI principal ya cargó y las animaciones ya están registradas
+                    contenedorLeyendas.innerHTML = '<div class="mensaje-servidor" style="color: red;">Error de conexión con Firebase.</div>';
+                }
+            }
+        });
     </script>
 </body>
 </html>
