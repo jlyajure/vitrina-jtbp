@@ -52,9 +52,19 @@
         .hero { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; background-color: #000; --x: 50%; --y: 50%; }
         .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('imagen_jtb_web.jpg') center/cover no-repeat; pointer-events: none; }
         .hero-bg-dark { filter: brightness(0.25) grayscale(0.7); z-index: 0; }
-        .hero-bg-light { filter: brightness(1.6) contrast(1.2) saturate(1.2); z-index: 1; -webkit-mask-image: radial-gradient(circle 350px at var(--x) var(--y), rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%); mask-image: radial-gradient(circle 350px at var(--x) var(--y), rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%); opacity: 0; transition: opacity 0.5s ease; }
-        .hero:hover .hero-bg-light { opacity: 1; }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none; }
+        
+        .hero-bg-light { filter: brightness(1.4) contrast(1.1) saturate(1.1); z-index: 1; opacity: 1; }
+        @media (min-width: 769px) {
+            .hero-bg-light {
+                -webkit-mask-image: radial-gradient(circle 350px at var(--x) var(--y), rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
+                mask-image: radial-gradient(circle 350px at var(--x) var(--y), rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
+                opacity: 0;
+                transition: opacity 0.5s ease;
+            }
+            .hero:hover .hero-bg-light { opacity: 1; }
+        }
+
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%); z-index: 2; pointer-events: none; }
         .hero-contenido { color: white; z-index: 3; max-width: 900px; padding: 20px; margin-top: 50px; pointer-events: auto; }
         .hero-contenido h1 { font-size: 4.5rem; font-weight: 700; margin-bottom: 10px; letter-spacing: 2px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
         .hero-contenido .resaltado { color: #e5a93d; }
@@ -67,7 +77,18 @@
         .btn-secundario:hover { background: #5000ff; color: #fff; transform: translateY(-5px); }
         @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
 
-        /* === SECCIÓN DE PROGRAMAS CON PARALLAX 3D === */
+        /* === ANIMACIÓN DE SCROLL (FADE-IN) === */
+        .scroll-anim {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .scroll-anim.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === SECCIÓN DE PROGRAMAS === */
         .seccion-oscura { padding: 100px 50px; background-color: #0a0a0a; text-align: center; perspective: 1500px; }
         .seccion-gris { padding: 100px 50px; background-color: #111; text-align: center; }
         .section-title { font-size: 3rem; margin-bottom: 60px; font-weight: 700; }
@@ -75,7 +96,6 @@
 
         .grid-programas { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; perspective: 1200px; }
 
-        /* Tarjeta 3D Base */
         .tarjeta { 
             background-color: #000000; 
             border: 1px solid #222; 
@@ -86,29 +106,25 @@
             flex-direction: column; 
             transform-style: preserve-3d;
             will-change: transform;
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .tarjeta:hover { border-color: #e5a93d; box-shadow: 0 15px 30px rgba(0,0,0,0.9), 0 0 15px rgba(229,169,61,0.2); }
         
-        /* Imagen dentro de la tarjeta flotando (Efecto profundidad) */
         .tarjeta img.img-programa { 
             width: 100%; 
             height: 180px; 
             object-fit: cover; 
             margin-bottom: 20px; 
             border-radius: 8px;
-            transform: translateZ(40px); /* Esto hace que la imagen sobresalga */
+            transform: translateZ(40px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.8);
             pointer-events: none;
         }
 
-        /* Textos y botones de la tarjeta flotando */
         .tarjeta p { font-size: 0.9rem; color: #888; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; transform: translateZ(30px); pointer-events: none;}
         .botones-tarjeta { display: flex; gap: 10px; justify-content: center; border-top: 1px solid #222; padding-top: 20px; flex-wrap: wrap; transform: translateZ(35px); }
 
-        /* Botones de las tarjetas actualizados (borde de color, fondo transparente) */
-        .tarjeta-btn, .tarjeta-btn-mixcloud { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; cursor: pointer; flex: 1; min-width: 100px; text-align: center; }
+        .tarjeta-btn, .tarjeta-btn-mixcloud { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; padding: 10px 15px; border-radius: 5px; transition: all 0.2s ease; cursor: pointer; flex: 1; min-width: 100px; text-align: center; }
         
         .tarjeta-btn { background-color: transparent; color: #e5a93d; border: 2px solid #e5a93d; }
         .tarjeta-btn:hover { background-color: #e5a93d; color: #000; transform: scale(1.05); }
@@ -118,8 +134,7 @@
 
         /* === SECCIÓN ARTISTAS FIRESTORE === */
         .grid-artistas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1350px; margin: 0 auto; width: 100%; }
-        .tarjeta-artista { background-color: #000; border-radius: 15px; overflow: hidden; text-align: left; border: 1px solid #333; transition: transform 0.3s ease; animation: fadeIn 0.8s ease-in-out; width: 100%; max-width: 350px; margin: 0 auto; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tarjeta-artista { background-color: #000; border-radius: 15px; overflow: hidden; text-align: left; border: 1px solid #333; transition: transform 0.3s ease; width: 100%; max-width: 350px; margin: 0 auto; }
         .tarjeta-artista:hover { transform: translateY(-5px); border-color: #e5a93d; }
         .tarjeta-artista img { width: 100%; height: 300px; object-fit: cover; object-position: top; background-color: #111; }
         .info-artista { padding: 25px; }
@@ -160,6 +175,7 @@
         #toast-compartir { visibility: hidden; min-width: 250px; background-color: #e5a93d; color: #000; text-align: center; border-radius: 30px; padding: 12px 20px; position: fixed; z-index: 3000; left: 50%; bottom: 30px; font-size: 0.9rem; font-weight: bold; transform: translateX(-50%); opacity: 0; transition: opacity 0.5s, bottom 0.5s; }
         #toast-compartir.mostrar { visibility: visible; opacity: 1; bottom: 50px; }
 
+        /* === CONFIGURACIÓN ESPECIAL PREMIUM PARA CELULARES === */
         @media (max-width: 768px) {
             .navbar { padding: 15px 10px; flex-direction: column; gap: 15px; text-align: center; }
             .logo-wrapper img { height: 75px; } 
@@ -176,11 +192,30 @@
             .section-title { font-size: 2.2rem; margin-bottom: 40px; }
             .seccion-oscura, .seccion-gris, .seccion-nosotros { padding: 40px 15px; }
             
-            /* Anular el efecto 3D en móviles para mejor rendimiento y experiencia táctil */
-            .tarjeta { transform: none !important; transition: none !important; }
+            /* Anular efectos 3D que traban la pantalla táctil */
+            .card-3d { transform-style: flat; perspective: none; }
+            .tarjeta img.img-programa { transform: none !important; }
+            .tarjeta p { transform: none !important; }
+            .botones-tarjeta { transform: none !important; }
+
+            /* Efecto "Latido Premium" para las tarjetas en móvil */
+            .tarjeta {
+                padding: 15px 10px;
+                animation: mobile-pulse-glow 3s infinite alternate;
+            }
+
+            @keyframes mobile-pulse-glow {
+                0% { box-shadow: 0 5px 15px rgba(0,0,0,0.8); border-color: #222; }
+                100% { box-shadow: 0 5px 20px rgba(229,169,61,0.25); border-color: rgba(229,169,61,0.6); }
+            }
+            
+            /* Efecto respuesta táctil física para los botones */
+            .tarjeta-btn:active, .tarjeta-btn-mixcloud:active, .btn-latido:active, .btn-secundario:active {
+                transform: scale(0.92) !important;
+                transition: transform 0.1s ease !important;
+            }
             
             .grid-programas { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .tarjeta { padding: 15px 10px; }
             .tarjeta img.img-programa { height: 90px; margin-bottom: 10px; }
             .tarjeta p { font-size: 0.75rem; margin-bottom: 10px; line-height: 1.4; }
             .botones-tarjeta { padding-top: 12px; flex-direction: column; display: block; }
@@ -222,20 +257,20 @@
         </nav>
     </header>
 
-    <div class="live-ticker-bar">
+    <div class="live-ticker-bar scroll-anim">
         <div class="live-ticker-content">
             <div class="live-badge"><div class="pulse-dot"></div> EN ROTACIÓN</div>
             <div class="ticker-text">Programas exclusivos y podcasts: <span>Jazz Clásico, Studio 79, Salsa Brava y Old School Rock</span></div>
         </div>
     </div>
 
-    <!-- HERO CON REFLECTOR -->
+    <!-- HERO CON REFLECTOR INTELIGENTE -->
     <section id="inicio" class="hero">
         <div class="hero-bg hero-bg-dark"></div>
         <div class="hero-bg hero-bg-light"></div>
         <div class="overlay"></div>
 
-        <div class="hero-contenido">
+        <div class="hero-contenido scroll-anim">
             <h1>JAZZTABUENO <span class="resaltado">PRODUCTIONS</span></h1>
             <p>El ritmo perfecto: La mejor selección de Jazz, Música Retro, Salsa y Rock.</p>
             <div class="hero-botones">
@@ -246,10 +281,10 @@
     </section>
 
     <section id="programas" class="seccion-oscura">
-        <h2 class="section-title">El <span>Sonido</span></h2>
+        <h2 class="section-title scroll-anim">El <span>Sonido</span></h2>
         <div class="grid-programas">
             <!-- TARJETA JAZZ -->
-            <div class="tarjeta card-3d">
+            <div class="tarjeta card-3d scroll-anim">
                 <img src="imagen_jtb_web.jpg" class="img-programa" alt="Jazztabueno">
                 <p>Una fina selección de trompetas, saxofones y el mejor ambiente del Jazz clásico para tus oídos.</p>
                 <div class="botones-tarjeta">
@@ -259,7 +294,7 @@
             </div>
             
             <!-- TARJETA STUDIO 79 -->
-            <div class="tarjeta card-3d">
+            <div class="tarjeta card-3d scroll-anim">
                 <img src="imagen_s79_web.jpg" class="img-programa" alt="Studio 79">
                 <p>Enciende la bola de espejos y disfruta de los grandes hits de los 70s y 80s sin interrupciones.</p>
                 <div class="botones-tarjeta">
@@ -269,7 +304,7 @@
             </div>
             
             <!-- TARJETA SALSA -->
-            <div class="tarjeta card-3d">
+            <div class="tarjeta card-3d scroll-anim">
                 <img src="imagen_sb_web.jpg" class="img-programa" alt="Salsa Brava">
                 <p>El verdadero sabor de la clave y las leyendas de la percusión caribeña, directo a tu teléfono.</p>
                 <div class="botones-tarjeta">
@@ -279,7 +314,7 @@
             </div>
             
             <!-- TARJETA ROCK -->
-            <div class="tarjeta card-3d">
+            <div class="tarjeta card-3d scroll-anim">
                 <img src="imagen_osrr_web.jpg" class="img-programa" alt="Old School Rock">
                 <p>Sube el volumen y disfruta de los himnos distorsionados que marcaron historia.</p>
                 <div class="botones-tarjeta">
@@ -291,20 +326,20 @@
     </section>
 
     <section id="artistas" class="seccion-gris">
-        <h2 class="section-title">Leyendas de la <span>Música</span></h2>
+        <h2 class="section-title scroll-anim">Leyendas de la <span>Música</span></h2>
         <div class="grid-artistas" id="contenedor-leyendas"></div>
     </section>
 
     <section id="nosotros" class="seccion-nosotros">
-        <h2 class="section-title">Nuestra <span>Esencia</span></h2>
-        <div class="contenido-nosotros">
+        <h2 class="section-title scroll-anim">Nuestra <span>Esencia</span></h2>
+        <div class="contenido-nosotros scroll-anim">
             <p>Somos un equipo de apasionados por el buen sonido. En JazzTaBueno Productions no creemos en la música desechable; creemos en el arte que trasciende el tiempo, en los acordes que erizan la piel y en las voces que marcaron a generaciones enteras.</p>
             <p>Nuestra misión es rescatar la época dorada de las leyendas musicales y llevarla directamente a tus oídos, curando meticulosamente cada programa para que disfrutes de la verdadera esencia del Jazz Clásico, la fiebre de Studio 79, el sabor indiscutible de la Salsa Brava y la rebeldía del Old School Rock.</p>
             <div class="firma">El Equipo de JTBP</div>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer scroll-anim">
         <div class="footer-logo"><img src="logo.png" alt="JazzTaBueno" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=\'color:#e5a93d; font-size:1.2rem;\'>JAZZTABUENO</h3>'"></div>
         <div class="footer-copy">&copy; 2026 JazzTaBueno Productions. Todos los derechos reservados.</div>
         <div class="footer-social">
@@ -381,7 +416,7 @@
                             nombreGenero = "OLD SCHOOL<br>ROCK RADIO";
                         }
                         const tarjetaHTML = `
-                            <div class="tarjeta-artista">
+                            <div class="tarjeta-artista scroll-anim">
                                 <img src="${artista.img}" alt="${artista.nombre}" onerror="this.onerror=null; this.src='https://i.postimg.cc/zVD4mstP/Jazztabueno-(2).png'">
                                 <div class="info-artista">
                                     <span class="genero">${nombreGenero}</span>
@@ -391,6 +426,11 @@
                             </div>
                         `;
                         contenedorLeyendas.innerHTML += tarjetaHTML;
+                    });
+                    
+                    // Volver a observar las leyendas recién creadas para el fade-in
+                    document.querySelectorAll('.tarjeta-artista.scroll-anim').forEach(el => {
+                        animacionScroll.observe(el);
                     });
                 }
             } catch (error) {
@@ -432,9 +472,9 @@
                 });
             }
 
-            // 5. EFECTO REFLECTOR (SPOTLIGHT) HERO
+            // 5. EFECTO REFLECTOR (SOLO PARA PC / RATÓN)
             const heroSection = document.querySelector('.hero');
-            if (heroSection) {
+            if (heroSection && window.innerWidth > 768) {
                 heroSection.addEventListener('mousemove', (e) => {
                     const rect = heroSection.getBoundingClientRect();
                     heroSection.style.setProperty('--x', `${e.clientX - rect.left}px`);
@@ -442,7 +482,7 @@
                 });
             }
 
-            // 6. EFECTO PARALLAX 3D (TARJETAS DE PROGRAMAS)
+            // 6. EFECTO PARALLAX 3D (SOLO PARA PC)
             if (window.innerWidth > 768) {
                 const tarjetas3D = document.querySelectorAll('.card-3d');
                 
@@ -468,6 +508,24 @@
                     });
                 });
             }
+
+            // 7. OBSERVER PARA EL FADE-IN (SCROLL ANIMATION)
+            const observerOpciones = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+            const animacionScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOpciones);
+
+            document.querySelectorAll('.scroll-anim').forEach(el => {
+                animacionScroll.observe(el);
+            });
         });
     </script>
 </body>
