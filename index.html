@@ -103,35 +103,18 @@
             pointer-events: none;
         }
 
-        /* La bola de espejos recortada y girando en 3D */
-        .bola-disco {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            margin-left: -40px;
-            width: 80px;
-            height: 80px;
-            clip-path: circle(48% at 50% 50%); /* Oculta el fondo verde perfecto */
-            animation: girar-bola 15s linear infinite;
-            transform: translateZ(60px); /* Flota por encima de la imagen */
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        @keyframes girar-bola {
-            0% { transform: translateZ(60px) rotate(0deg); }
-            100% { transform: translateZ(60px) rotate(360deg); }
-        }
-
         /* Textos y botones de la tarjeta flotando */
         .tarjeta p { font-size: 0.9rem; color: #888; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; transform: translateZ(30px); pointer-events: none;}
         .botones-tarjeta { display: flex; gap: 10px; justify-content: center; border-top: 1px solid #222; padding-top: 20px; flex-wrap: wrap; transform: translateZ(35px); }
 
+        /* Botones de las tarjetas actualizados (borde de color, fondo transparente) */
         .tarjeta-btn, .tarjeta-btn-mixcloud { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; padding: 10px 15px; border-radius: 5px; transition: all 0.3s ease; cursor: pointer; flex: 1; min-width: 100px; text-align: center; }
-        .tarjeta-btn { background-color: #e5a93d; color: #000; border: 1px solid #e5a93d;}
-        .tarjeta-btn:hover { background-color: #f7bb50; border-color: #f7bb50; transform: scale(1.05);}
+        
+        .tarjeta-btn { background-color: transparent; color: #e5a93d; border: 2px solid #e5a93d; }
+        .tarjeta-btn:hover { background-color: #e5a93d; color: #000; transform: scale(1.05); }
+        
         .tarjeta-btn-mixcloud { background-color: transparent; color: #fff; border: 2px solid #5000ff; }
-        .tarjeta-btn-mixcloud:hover { background-color: #5000ff; border-color: #5000ff; color: #fff; transform: scale(1.05);}
+        .tarjeta-btn-mixcloud:hover { background-color: #5000ff; border-color: #5000ff; color: #fff; transform: scale(1.05); }
 
         /* === SECCIÓN ARTISTAS FIRESTORE === */
         .grid-artistas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1350px; margin: 0 auto; width: 100%; }
@@ -275,9 +258,8 @@
                 </div>
             </div>
             
-            <!-- TARJETA STUDIO 79 (CON BOLA DE ESPEJOS) -->
+            <!-- TARJETA STUDIO 79 -->
             <div class="tarjeta card-3d">
-                <img src="imagen_s79_bola_web.jpg" class="bola-disco" alt="Bola Disco">
                 <img src="imagen_s79_web.jpg" class="img-programa" alt="Studio 79">
                 <p>Enciende la bola de espejos y disfruta de los grandes hits de los 70s y 80s sin interrupciones.</p>
                 <div class="botones-tarjeta">
@@ -461,7 +443,6 @@
             }
 
             // 6. EFECTO PARALLAX 3D (TARJETAS DE PROGRAMAS)
-            // Solo se activa en pantallas de PC para no romper el touch en móviles
             if (window.innerWidth > 768) {
                 const tarjetas3D = document.querySelectorAll('.card-3d');
                 
@@ -474,17 +455,14 @@
                         const centroX = rect.width / 2;
                         const centroY = rect.height / 2;
                         
-                        // Calculamos la inclinación (máximo 12 grados de rotación)
                         const rotX = ((y - centroY) / centroY) * -12;
                         const rotY = ((x - centroX) / centroX) * 12;
                         
-                        // Aplicamos la rotación en 3D
                         tarjeta.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`;
                         tarjeta.style.transition = "transform 0.1s";
                     });
 
                     tarjeta.addEventListener('mouseleave', () => {
-                        // Vuelve a su posición original suavemente
                         tarjeta.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
                         tarjeta.style.transition = "transform 0.5s ease-out";
                     });
