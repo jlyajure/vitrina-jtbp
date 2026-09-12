@@ -242,12 +242,13 @@
             z-index: 0;
         }
 
-        /* Capa iluminada con máscara circular (El Reflector) */
+        /* Capa iluminada con máscara circular (El Reflector) - AHORA MÁS POTENTE */
         .hero-bg-light {
-            filter: brightness(1.2) contrast(1.1);
+            filter: brightness(1.6) contrast(1.2) saturate(1.2); /* Brillo y color al máximo */
             z-index: 1;
-            -webkit-mask-image: radial-gradient(circle 300px at var(--x) var(--y), rgba(0,0,0,1) 10%, rgba(0,0,0,0) 80%);
-            mask-image: radial-gradient(circle 300px at var(--x) var(--y), rgba(0,0,0,1) 10%, rgba(0,0,0,0) 80%);
+            /* El centro sólido de luz es más amplio (30%) para que la luz sea más fuerte */
+            -webkit-mask-image: radial-gradient(circle 350px at var(--x) var(--y), rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
+            mask-image: radial-gradient(circle 350px at var(--x) var(--y), rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -257,14 +258,14 @@
             opacity: 1;
         }
 
-        /* Overlay suave para asegurar lectura del texto */
+        /* Overlay suave para asegurar lectura del texto - AHORA MÁS TRASLÚCIDO EN EL CENTRO */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%); 
+            background: radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.8) 100%); 
             z-index: 2;
             pointer-events: none;
         }
